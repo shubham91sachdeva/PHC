@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHC — Detailed Syllabi by Level</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root{
+  --navy:#0F2D5E;--teal:#0A7C6E;--gold:#C9951A;--rose:#B03060;
+  --sage:#2E6E45;--purple:#5B2D8E;--orange:#C45A1A;
+  --white:#fff;--light:#F7F9FC;--lgray:#E8EDF5;
+  --gray:#6B7280;--dgray:#374151;--border:#D1D5DB;--ink:#0D1117;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--light);color:var(--ink);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy),#1a4a8a);padding:40px 48px 0;color:#fff;}
+.hero .vtag{background:rgba(255,255,255,0.15);display:inline-block;padding:3px 12px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:12px;}
+.hero h1{font-size:30px;font-weight:800;margin-bottom:8px;}
+.hero p{color:rgba(255,255,255,.75);font-size:14px;max-width:640px;line-height:1.7;margin-bottom:28px;}
+
+/* TABS */
+.tab-nav{display:flex;gap:0;border-bottom:none;margin-top:4px;}
+.tab-btn{padding:13px 28px;background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.65);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border-radius:10px 10px 0 0;transition:all .2s;letter-spacing:.2px;margin-right:4px;}
+.tab-btn:hover{background:rgba(255,255,255,0.18);color:#fff;}
+.tab-btn.active{background:#fff;color:var(--navy);}
+.tab-btn .badge{display:inline-block;background:var(--gold);color:#fff;padding:1px 7px;border-radius:100px;font-size:9px;font-weight:700;margin-left:7px;}
+.tab-btn.active .badge{background:var(--navy);}
+
+/* TAB PANELS */
+.tab-panel{display:none;padding:40px 48px;max-width:1100px;}
+.tab-panel.active{display:block;}
+
+/* LAYOUT: index + content */
+.syllabus-wrap{display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start;}
+.index-col{position:sticky;top:24px;}
+.index-box{background:#fff;border-radius:12px;border:1px solid var(--border);padding:18px;overflow:hidden;}
+.index-box h3{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.index-box a{display:block;padding:6px 10px;border-radius:7px;color:var(--dgray);font-size:12px;text-decoration:none;margin-bottom:1px;transition:all .15s;line-height:1.4;}
+.index-box a:hover{background:var(--lgray);color:var(--navy);}
+.index-box .i-sep{height:1px;background:var(--border);margin:8px 0;}
+.content-col{}
+
+/* LEVEL INTRO */
+.level-intro{background:#fff;border-radius:14px;padding:24px;border:1px solid var(--border);margin-bottom:28px;}
+.level-intro .lhead{display:flex;gap:14px;align-items:center;margin-bottom:14px;}
+.level-intro .licon{font-size:32px;}
+.level-intro h2{font-size:22px;font-weight:800;color:var(--navy);}
+.level-intro h2 span{display:block;font-size:12px;font-weight:500;color:var(--teal);margin-top:2px;}
+.level-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;}
+.lm{background:var(--lgray);border-radius:8px;padding:8px 14px;}
+.lm .lk{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);}
+.lm .lv{font-size:13px;font-weight:700;color:var(--navy);margin-top:2px;}
+
+/* TOPIC SECTIONS */
+.topic{background:#fff;border-radius:14px;border:1px solid var(--border);margin-bottom:20px;overflow:hidden;scroll-margin-top:80px;}
+.topic-head{padding:18px 22px;display:flex;gap:14px;align-items:center;cursor:pointer;}
+.topic-head:hover{background:var(--light);}
+.topic-icon{font-size:24px;flex-shrink:0;}
+.topic-head-text h3{font-size:16px;font-weight:700;color:var(--navy);}
+.topic-head-text p{font-size:12px;color:var(--gray);margin-top:2px;}
+.topic-head .expand{margin-left:auto;color:var(--gray);font-size:11px;background:var(--lgray);padding:3px 9px;border-radius:100px;flex-shrink:0;}
+.topic-body{padding:0 22px 22px;border-top:1px solid var(--border);}
+
+/* TOPIC INNER */
+.obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+.obj-card{background:var(--light);border-radius:9px;padding:12px 14px;border-left:3px solid var(--teal);}
+.obj-card p{font-size:12px;color:var(--dgray);line-height:1.6;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin:18px 0 8px;}
+.content-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+.content-list li{font-size:13px;color:var(--dgray);padding:7px 0 7px 18px;position:relative;border-bottom:1px solid var(--lgray);line-height:1.6;}
+.content-list li:last-child{border-bottom:none;}
+.content-list li::before{content:'→';position:absolute;left:0;color:var(--teal);font-weight:700;font-size:11px;top:9px;}
+.content-list li strong{color:var(--navy);}
+.sub-list{list-style:disc;padding-left:22px;margin:5px 0;}
+.sub-list li{font-size:12px;color:var(--gray);border:none;padding:2px 0;line-height:1.5;}
+.sub-list li::before{display:none;}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.activity-card{background:#F0FDF4;border-radius:9px;padding:12px 14px;}
+.activity-card .at{font-size:10px;font-weight:700;color:var(--sage);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.activity-card p{font-size:12px;color:var(--dgray);line-height:1.5;}
+.outcome-list{display:flex;flex-direction:column;gap:5px;margin:10px 0;}
+.outcome-list .oc{font-size:12px;color:var(--dgray);padding:6px 10px;background:#EFF6FF;border-radius:7px;line-height:1.5;}
+.outcome-list .oc::before{content:'✓ ';color:var(--sage);font-weight:700;}
+.note-box{background:#FFFBEB;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:12px;color:#92400E;line-height:1.6;}
+.note-box strong{color:#78350F;}
+.pee-safe-box{background:#FFF0F6;border:1px solid #F9A8D4;border-radius:10px;padding:14px 16px;margin:14px 0;}
+.pee-safe-box .ps-head{font-size:12px;font-weight:700;color:#9D174D;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.pee-safe-box p{font-size:12px;color:#4B1D32;line-height:1.6;}
+
+/* TAGS */
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;}
+.tag{background:var(--lgray);color:var(--dgray);padding:2px 9px;border-radius:100px;font-size:10px;font-weight:600;}
+.tag.g{background:#D1FAE5;color:#065F46;}
+.tag.b{background:#DBEAFE;color:#1E40AF;}
+.tag.gold{background:#FEF3C7;color:#92400E;}
+.tag.r{background:#FCE7F3;color:#9D174D;}
+.tag.p{background:#EDE9FE;color:#5B21B6;}
+
+@media(max-width:900px){
+  .hero{padding:28px 20px 0;}
+  .tab-btn{padding:10px 14px;font-size:12px;}
+  .tab-panel{padding:24px 16px;}
+  .syllabus-wrap{grid-template-columns:1fr;}
+  .index-col{position:static;}
+  .obj-grid,.activity-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="vtag">PROGRESSIVE HEALTH CLUB · CURRICULUM DOCUMENT · v1.0</span>
+  <h1>PHC Detailed Syllabi — All Levels</h1>
+  <p>Comprehensive topic-by-topic curriculum for Foundation (Class 1–4), Basic (Class 5–8), and Advanced (Class 9–12). Each level is age-calibrated in depth, language, and delivery approach. This document is the curriculum reference — not the delivery schedule.</p>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('foundation')">🌱 Foundation <span class="badge">Class 1–4</span></button>
+    <button class="tab-btn" onclick="showTab('basic')">📗 Basic <span class="badge">Class 5–8</span></button>
+    <button class="tab-btn" onclick="showTab('advanced')">📘 Advanced <span class="badge">Class 9–12</span></button>
+  </div>
+</div>
+
+<!-- =================== FOUNDATION =================== -->
+<div id="tab-foundation" class="tab-panel active">
+  <div class="syllabus-wrap">
+    <div class="index-col">
+      <div class="index-box">
+        <h3>Content Index</h3>
+        <a href="#f-intro">Level Overview</a>
+        <div class="i-sep"></div>
+        <a href="#f-hygiene">🧼 Personal Hygiene</a>
+        <a href="#f-dental">🦷 Dental Health</a>
+        <a href="#f-nutrition">🥗 Nutrition Basics</a>
+        <a href="#f-movement">🏃 Movement & Play</a>
+        <a href="#f-body">🫀 My Body</a>
+        <a href="#f-safety">🛡️ Safety & Good Touch</a>
+        <a href="#f-emotions">😊 Emotions</a>
+        <a href="#f-social">🤝 Friends & Community</a>
+        <a href="#f-environment">🌿 Environment</a>
+        <a href="#f-yoga">🧘 Yoga & Breathing</a>
+        <a href="#f-values">⭐ Values & Moral</a>
+        <a href="#f-money">💰 Money Awareness</a>
+      </div>
+    </div>
+    <div class="content-col">
+      <div class="level-intro" id="f-intro">
+        <div class="lhead"><span class="licon">🌱</span>
+          <h2>Foundation Level<span>Class 1 to 4 · Ages 6 to 10</span></h2>
+        </div>
+        <p style="font-size:13px;color:var(--dgray);line-height:1.7;">Foundation is play-first, story-led, and habit-forming. At this age children are forming their first health habits — what they eat, how they move, how they feel, and how they treat their bodies. Every topic is introduced through stories, games, songs, and hands-on activities. No heavy science — just curiosity, wonder, and healthy routines.</p>
+        <div class="level-meta">
+          <div class="lm"><div class="lk">Approach</div><div class="lv">Play-based & Story-led</div></div>
+          <div class="lm"><div class="lk">Session Length</div><div class="lv">20–30 min (integrated)</div></div>
+          <div class="lm"><div class="lk">Key Method</div><div class="lv">Stories, songs, games, art</div></div>
+          <div class="lm"><div class="lk">Assessment</div><div class="lv">Portfolio & observation</div></div>
+        </div>
+      </div>
+
+      <!-- HYGIENE -->
+      <div class="topic" id="f-hygiene">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧼</span>
+          <div class="topic-head-text"><h3>Personal Hygiene</h3><p>Hands, body, clothes, hair — building daily clean habits</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Learning Objectives</div>
+          <div class="obj-grid">
+            <div class="obj-card"><p>Understand why we wash hands and when we must</p></div>
+            <div class="obj-card"><p>Know that bathing daily keeps illness away</p></div>
+            <div class="obj-card"><p>Recognise that clean clothes, nails, and hair are part of health</p></div>
+            <div class="obj-card"><p>Be able to perform the 6-step handwashing routine independently</p></div>
+          </div>
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Handwashing:</strong> The 6-step WHO method — palm-to-palm, between fingers, backs of hands, thumbs, fingertips, wrists. When to wash: before eating, after toilet, after playing outside, after touching animals, after coughing/sneezing</li>
+            <li><strong>Soap science (simple):</strong> Germs are tiny creatures that make us sick. Soap lifts them off our skin. Water alone is not enough.</li>
+            <li><strong>Bathing routine:</strong> Why daily bathing matters. Body parts that need extra attention — armpits, feet, behind ears. Drying fully after bath.</li>
+            <li><strong>Nail care:</strong> Trimming nails short, cleaning under nails, what lives under dirty nails (germs, parasites)</li>
+            <li><strong>Hair care:</strong> Regular washing, combing, lice prevention and recognition — no shame attached</li>
+            <li><strong>Clothes hygiene:</strong> Wearing clean clothes daily, changing undergarments, wearing socks with shoes</li>
+            <li><strong>Sneezing/coughing etiquette:</strong> Into the elbow, not hands. Disposing tissues. Washing hands after.</li>
+            <li><strong>Toilet hygiene:</strong> Proper wiping, flushing, always washing hands with soap after toilet</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Germ Glitter:</strong> Coat hands in glitter = germs. Try to remove with water only. Then soap. See the difference. Unforgettable.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Hygiene Song:</strong> Set the 6-step handwash routine to a 20-second tune children can memorise and sing while washing.</p></div>
+            <div class="activity-card"><div class="at">Activity 3</div><p><strong>Clean Body Chart:</strong> Students draw themselves and label 5 body parts they clean every day and how.</p></div>
+            <div class="activity-card"><div class="at">Activity 4</div><p><strong>Hygiene Pledge Board:</strong> Class creates a "We Wash Our Hands" pledge board with their handprints in paint.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DENTAL -->
+      <div class="topic" id="f-dental">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🦷</span>
+          <div class="topic-head-text"><h3>Dental Health</h3><p>Teeth, brushing, food choices, and visiting the dentist</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Learning Objectives</div>
+          <div class="obj-grid">
+            <div class="obj-card"><p>Know how to brush teeth correctly (2 minutes, twice daily)</p></div>
+            <div class="obj-card"><p>Understand that sugar feeds the germs that make holes in teeth</p></div>
+            <div class="obj-card"><p>Know that milk teeth fall out and adult teeth are permanent</p></div>
+            <div class="obj-card"><p>Not be afraid of the dentist — see checkups as normal and good</p></div>
+          </div>
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Types of teeth:</strong> Incisors (cutting), canines (tearing), molars (grinding). Milk teeth vs adult teeth — why milk teeth still matter</li>
+            <li><strong>Brushing technique:</strong> Soft circular motion on all surfaces — front, back, top. 2 minutes. Twice a day — morning and before bed. Why before bed is more important.</li>
+            <li><strong>Toothbrush care:</strong> Rinse after use, store upright, replace every 3 months (or when bristles splay)</li>
+            <li><strong>Tongue cleaning:</strong> Bacteria live on the tongue too. A tongue scraper or back of toothbrush cleans it.</li>
+            <li><strong>Sugar and cavities:</strong> Sugar + mouth bacteria = acid = holes in teeth (cavities). The simpler the explanation, the better remembered.</li>
+            <li><strong>Foods that help teeth:</strong> Milk, curd, paneer, cheese (calcium), crunchy vegetables (natural scrubbing), water (washes away sugar)</li>
+            <li><strong>Foods that harm teeth:</strong> Toffees, chewing gum, biscuits that stick, cold drinks, fruit juice (even fresh — acidic)</li>
+            <li><strong>Dentist visits:</strong> What a dentist does, what tools they use, why it doesn't have to be scary. Annual dental camp held at school.</li>
+            <li><strong>Fluoride toothpaste:</strong> Why it matters — strengthens tooth enamel. Children should use a pea-sized amount.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Egg in Vinegar Experiment:</strong> Soak an egg in vinegar (= acid from sugar on teeth). Watch enamel dissolve over 24 hours. Powerful visual demonstration.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Brush-Along:</strong> Toothbrush brought from home (or provided). 2-minute guided brushing session with timer and music.</p></div>
+            <div class="activity-card"><div class="at">Activity 3</div><p><strong>Smile Chart:</strong> Students draw their smile. Mark which teeth are milk teeth and which are adult teeth (or expected to be).</p></div>
+            <div class="activity-card"><div class="at">Activity 4</div><p><strong>Good Food / Bad Food Sort:</strong> Picture cards of foods sorted into "teeth friends" and "teeth enemies."</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUTRITION -->
+      <div class="topic" id="f-nutrition">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🥗</span>
+          <div class="topic-head-text"><h3>Nutrition Basics</h3><p>Colours on the plate, eating variety, drinking water</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>The Rainbow Plate:</strong> Eating different coloured foods gives different powers — red (lycopene/immune), orange (Vitamin A/eyes), green (iron/strength), yellow (Vitamin C), white (calcium)</li>
+            <li><strong>Food groups simply:</strong> Grains (energy), Dal/Eggs/Milk (building), Vegetables/Fruits (protection), Fats & Oils (small amounts). A balanced meal has all.</li>
+            <li><strong>Why breakfast matters:</strong> The brain and body need fuel after sleep. Skipping breakfast = poor concentration. Simple story-based explanation.</li>
+            <li><strong>Water:</strong> Body is 60% water. We need 6–8 glasses a day. Thirst means we are already a little dehydrated. Water over cold drinks always.</li>
+            <li><strong>Junk food awareness (gentle):</strong> Chips, biscuits, cold drinks — fine sometimes, not every day. What does "sometimes food" mean?</li>
+            <li><strong>Indian traditional foods:</strong> Dal-roti, khichdi, curd-rice — why these are actually very healthy and have been eaten for generations</li>
+            <li><strong>Eating slowly:</strong> The stomach takes 20 minutes to tell the brain it's full. Chewing well = better digestion</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Rainbow Plate Art:</strong> Students draw and colour a plate with at least 5 different coloured foods and label each.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>My Breakfast Show & Tell:</strong> Students describe (or draw) what they ate for breakfast and the class identifies which food groups are present.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOVEMENT -->
+      <div class="topic" id="f-movement">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🏃</span>
+          <div class="topic-head-text"><h3>Movement & Play</h3><p>Why bodies need to move — fun, fitness, and outdoor play</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Bodies need movement:</strong> Just like plants need sunlight, bodies need movement to grow strong. 60 minutes of active play every day.</li>
+            <li><strong>Types of play:</strong> Running, jumping, climbing, swimming, dancing, cycling, traditional Indian games (kabaddi, kho-kho, lagori, gilli-danda)</li>
+            <li><strong>Why screens are different from play:</strong> Screens rest the body; play builds it. The difference between active and passive time.</li>
+            <li><strong>Rest and sleep:</strong> Children aged 6–10 need 9–11 hours of sleep. What happens in the body during sleep — muscles repair, brain sorts memories</li>
+            <li><strong>Warming up and cooling down:</strong> Why we stretch before running. What a pulled muscle feels like and why we should prevent it.</li>
+            <li><strong>Sports and games:</strong> All movement counts. There is no "bad at sports" — every body can move in some way.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Movement Bingo:</strong> Bingo card with movement tasks (jump 10 times, touch your toes, spin around). Played in the classroom or corridor.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Traditional Games Day:</strong> Once a term, students play traditional Indian games and discuss how they are as good as (or better than) screen games.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY BODY -->
+      <div class="topic" id="f-body">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🫀</span>
+          <div class="topic-head-text"><h3>My Body</h3><p>Body parts, organs, how the body works — basic anatomy</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>External body parts:</strong> Correct names for all body parts including private parts (penis, vagina) — using correct anatomical terms is safer for children</li>
+            <li><strong>Organs and their jobs:</strong> Heart (pumps blood), lungs (breathing), stomach (digestion), brain (thinking and controlling), bones (structure), skin (protection)</li>
+            <li><strong>The senses:</strong> Sight, hearing, smell, taste, touch — and which organ does what</li>
+            <li><strong>Why bodies are all different:</strong> Different heights, weights, skin colours, shapes — all normal. Nobody's body is better than another's.</li>
+            <li><strong>Body signals:</strong> Hunger, thirst, pain, tiredness — the body talking to us. Why we should listen.</li>
+            <li><strong>Private parts:</strong> Parts covered by swimwear are private. Nobody should touch your private parts except a doctor with a parent present. You can always tell a trusted adult.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SAFETY -->
+      <div class="topic" id="f-safety">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🛡️</span>
+          <div class="topic-head-text"><h3>Safety & Good Touch Bad Touch</h3><p>Body autonomy, personal safety, trusted adults</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="note-box"><strong>Delivery note:</strong> This topic is delivered with trained female and male facilitators in age-appropriate language. No graphic content. Role-play with puppets recommended for Class 1–2.</div>
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Good touch:</strong> A hug from a family member who asks first, a high-five from a friend, a doctor examining you with a parent present</li>
+            <li><strong>Bad touch:</strong> Any touch on private parts not for medical reasons, any touch that feels wrong even if from someone you know</li>
+            <li><strong>Confusing touch:</strong> Sometimes someone familiar does something that feels wrong. It is still not okay. You are still allowed to say no.</li>
+            <li><strong>Body belongs to you:</strong> No one has the right to touch your body without your permission — not a relative, teacher, or friend</li>
+            <li><strong>Say No, Go, Tell:</strong> The three-step safety rule. Say no, get away, tell a trusted adult immediately</li>
+            <li><strong>Trusted adults:</strong> Who are your 3 trusted adults? Parent, teacher, school counsellor, another relative. Practice saying their names.</li>
+            <li><strong>Secrets vs surprises:</strong> Good surprises are temporary (a birthday gift). Bad secrets make you feel uncomfortable — these should always be told.</li>
+            <li><strong>POCSO Act (simple):</strong> A law in India protects children. If someone hurts your body, they can go to jail. You will not get in trouble for telling.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Puppet Role-Play:</strong> Puppets act out scenarios. Children call out "Good Touch" or "Bad Touch" and decide what the puppet should do.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>My Safety Circle:</strong> Students draw their 3 trusted adults and practice saying "I will tell [name] if I feel unsafe."</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMOTIONS -->
+      <div class="topic" id="f-emotions">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">😊</span>
+          <div class="topic-head-text"><h3>Emotions & Feelings</h3><p>Naming feelings, expressing them safely, calming down</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>All feelings are okay:</strong> Happy, sad, angry, scared, excited, embarrassed, proud — all feelings are normal. What matters is what we do with them.</li>
+            <li><strong>Naming feelings:</strong> Using words to name emotions instead of acting out. "I feel angry because…" vs hitting or crying without explaining.</li>
+            <li><strong>Feelings in the body:</strong> Butterflies in stomach = nervous. Tight chest = scared or sad. Racing heart = excited or scared. Learning to read body signals.</li>
+            <li><strong>Calming down tools:</strong> Deep belly breaths (3 slow breaths), count to 10, squeeze a stress ball, draw how you feel, tell a trusted adult</li>
+            <li><strong>Empathy:</strong> How does someone else feel? Noticing when a friend is sad or scared and what you can do to help.</li>
+            <li><strong>Asking for help:</strong> It is brave to say "I need help." It is strong to tell someone when something is wrong.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Feelings Faces Wheel:</strong> Spinning wheel with 8 emotions. Students spin and make the face, then describe a time they felt that way.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Balloon Breath:</strong> Students learn belly breathing by placing hands on stomach and feeling it rise like a balloon. Practise daily for 2 minutes.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="topic" id="f-social">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🤝</span>
+          <div class="topic-head-text"><h3>Friends & Community</h3><p>Kindness, sharing, inclusion, and caring for others</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>What makes a good friend:</strong> Kind, honest, listens, shares, doesn't make you feel bad about yourself</li>
+            <li><strong>Kindness as a health practice:</strong> When you are kind, you feel good too. Science shows that helping others releases happy chemicals in the brain.</li>
+            <li><strong>Inclusion:</strong> Everyone deserves to play. Leaving someone out on purpose is not kind. How to include someone who looks lonely.</li>
+            <li><strong>Conflict resolution:</strong> What to do when friends disagree. Take turns speaking, listen, find a solution together, say sorry when you hurt someone</li>
+            <li><strong>Community health:</strong> Picking up litter, not wasting water, being polite to school helpers — taking care of our shared spaces</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ENVIRONMENT -->
+      <div class="topic" id="f-environment">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🌿</span>
+          <div class="topic-head-text"><h3>Environmental Health</h3><p>Clean air, clean water, plants, animals, and our responsibility</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Air and health:</strong> Pollution makes people sick. Why we plant trees. Why burning things is harmful. Clean air = healthy lungs.</li>
+            <li><strong>Water and health:</strong> Dirty water causes disease. Why we save water. How to drink clean water (boiled/filtered where needed).</li>
+            <li><strong>Waste and hygiene:</strong> Where garbage goes. Why not littering matters. Composting food waste (school garden activity).</li>
+            <li><strong>Plants and health:</strong> Plants give us oxygen, food, and medicine. How to grow a simple herb at home (tulsi, pudina).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- YOGA -->
+      <div class="topic" id="f-yoga">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧘</span>
+          <div class="topic-head-text"><h3>Yoga & Breathing</h3><p>Simple asanas, breathing games, and relaxation</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Yoga introduction:</strong> What yoga is — a way to move the body AND calm the mind. Not gymnastics, not a competition.</li>
+            <li><strong>Simple asanas (animal poses):</strong> Cat-Cow, Downward Dog, Tree Pose, Child's Pose, Butterfly, Cobra — taught as animal stories</li>
+            <li><strong>Sun Salutation (simplified 5-step):</strong> Mountain, Forward Fold, Plank, Cobra, Downward Dog — a complete morning routine for young children</li>
+            <li><strong>Pranayama for children:</strong> Balloon Breathing (belly), Bunny Breath (quick sniffs), Bumble Bee (Bhramari — hum on exhale)</li>
+            <li><strong>Relaxation:</strong> 3-minute guided body scan — "close your eyes, feel your feet, feel your legs…" — a simple Yoga Nidra for children</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VALUES -->
+      <div class="topic" id="f-values">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">⭐</span>
+          <div class="topic-head-text"><h3>Values & Moral Health</h3><p>Honesty, responsibility, respect, and integrity for young children</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Honesty:</strong> Telling the truth even when it is hard. Short story: the consequences of lying vs truth-telling. How honesty builds trust.</li>
+            <li><strong>Responsibility:</strong> Taking care of your things, completing tasks, owning mistakes. "I forgot" is different from "I won't."</li>
+            <li><strong>Respect:</strong> For people, animals, plants, property. How we speak to teachers, helpers, classmates matters.</li>
+            <li><strong>Gratitude:</strong> Noticing what we have. A daily gratitude practice (3 things I am grateful for today).</li>
+            <li><strong>Fairness:</strong> Taking turns, sharing, not cheating in games. Why fairness makes everyone feel good.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MONEY -->
+      <div class="topic" id="f-money">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💰</span>
+          <div class="topic-head-text"><h3>Money Awareness</h3><p>Needs vs wants, saving, and the value of money</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>What is money:</strong> A way to exchange value. How it is earned (parents work for it). Why it should not be wasted.</li>
+            <li><strong>Needs vs wants:</strong> Food, clothes, shelter = needs. A new toy, ice cream every day = wants. Both are okay but needs come first.</li>
+            <li><strong>Saving:</strong> A piggy bank story. Setting a small goal and saving towards it. Delayed gratification at the simplest level.</li>
+            <li><strong>Pocket money:</strong> If you receive pocket money — divide into 3: spend, save, give (to someone who needs it).</li>
+            <li><strong>Financial health connection:</strong> Worrying about money makes adults stressed and can affect family health. Children who understand money early help their families better.</li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- end content-col -->
+  </div>
+</div><!-- end foundation tab -->
+
+<!-- =================== BASIC =================== -->
+<div id="tab-basic" class="tab-panel">
+  <div class="syllabus-wrap">
+    <div class="index-col">
+      <div class="index-box">
+        <h3>Content Index</h3>
+        <a href="#b-intro">Level Overview</a>
+        <div class="i-sep"></div>
+        <a href="#b-hygiene">🧼 Personal Hygiene</a>
+        <a href="#b-dental">🦷 Dental Health</a>
+        <a href="#b-nutrition">🥗 Nutrition Science</a>
+        <a href="#b-fitness">💪 Physical Fitness</a>
+        <a href="#b-puberty">🌸 Puberty & Body</a>
+        <a href="#b-menstrual">🩸 Menstrual Health</a>
+        <a href="#b-safety">🛡️ Sexual Safety</a>
+        <a href="#b-mental">🧠 Mental Health</a>
+        <a href="#b-emotions">😌 Emotional Health</a>
+        <a href="#b-social">🤝 Social Health</a>
+        <a href="#b-digital">📱 Digital Wellness</a>
+        <a href="#b-yoga">🧘 Yoga & Mindfulness</a>
+        <a href="#b-moral">⭐ Moral Health</a>
+        <a href="#b-financial">💰 Financial Awareness</a>
+        <a href="#b-environment">🌿 Environmental Health</a>
+      </div>
+    </div>
+    <div class="content-col">
+      <div class="level-intro" id="b-intro">
+        <div class="lhead"><span class="licon">📗</span>
+          <h2>Basic Level<span>Class 5 to 8 · Ages 10 to 14</span></h2>
+        </div>
+        <p style="font-size:13px;color:var(--dgray);line-height:1.7;">Basic level introduces health as a science. Students at this age are experiencing puberty, forming strong peer groups, consuming social media, and building habits that will last decades. The curriculum is awareness-first — never prescriptive or shaming. Each topic gives students the scientific vocabulary and practical tools to make informed choices about their own health.</p>
+        <div class="level-meta">
+          <div class="lm"><div class="lk">Approach</div><div class="lv">Science + Life Skills</div></div>
+          <div class="lm"><div class="lk">Session Length</div><div class="lv">40 min dedicated PHC period</div></div>
+          <div class="lm"><div class="lk">Key Method</div><div class="lv">Worksheets, expert talks, discussion</div></div>
+          <div class="lm"><div class="lk">Assessment</div><div class="lv">Health Report Card + portfolio</div></div>
+        </div>
+      </div>
+
+      <!-- HYGIENE B -->
+      <div class="topic" id="b-hygiene">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧼</span>
+          <div class="topic-head-text"><h3>Personal Hygiene</h3><p>Science of hygiene, puberty hygiene, disease prevention</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Microbiology basics:</strong> What bacteria and viruses are, how they spread — contact, droplet, faecal-oral routes. Why hand hygiene breaks the chain of infection.</li>
+            <li><strong>The science of soap:</strong> Surfactants — how soap molecules surround and lift bacteria/viruses off the skin. Alcohol hand sanitiser vs soap.</li>
+            <li><strong>Puberty hygiene changes:</strong> Increased sweat glands activated during puberty → body odour. Deodorant vs antiperspirant. Daily bathing becomes more important.</li>
+            <li><strong>Acne and skin care:</strong> Sebaceous glands activated by androgens. Why pimples happen. Gentle cleansing — not scrubbing. Not popping pimples. When to see a dermatologist.</li>
+            <li><strong>Menstrual hygiene (girls):</strong> Changing sanitary products every 4–6 hours regardless of flow. Washing hands before and after. Disposal in bins, not toilets.</li>
+            <li><strong>Foot and nail hygiene:</strong> Fungal infections (athlete's foot, ringworm) — moisture, shared shoes, damp socks. Prevention and recognition.</li>
+            <li><strong>Oral hygiene revisited:</strong> The link between oral bacteria and systemic disease. Flossing introduced. Mouthwash — when appropriate.</li>
+            <li><strong>Toilet hygiene in school:</strong> Using school toilets safely — Pee Safe toilet seat sanitizer use, why squatting vs sitting matters for hygiene in shared facilities.</li>
+            <li><strong>Shared items:</strong> Never share combs, razors, towels, water bottles — transmission of infection, lice, hepatitis B</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Agar Plate Experiment:</strong> Swab hands before and after washing onto agar plates. Observe bacterial growth over 48 hours. Visual proof of handwashing effectiveness.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Hygiene Audit:</strong> Students audit their own daily hygiene routine against a checklist, identify gaps, and make a 1-week improvement plan.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DENTAL B -->
+      <div class="topic" id="b-dental">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🦷</span>
+          <div class="topic-head-text"><h3>Dental Health</h3><p>Oral biology, diet and teeth, orthodontics, dental checkups</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Tooth structure:</strong> Enamel (hardest substance in body), dentine, pulp, root. What each layer does and what damages it.</li>
+            <li><strong>Dental caries mechanism:</strong> Streptococcus mutans bacteria → ferments sugar → lactic acid → demineralises enamel → cavity. Understanding this makes the "avoid sugar" message logical, not arbitrary.</li>
+            <li><strong>Plaque and tartar:</strong> What dental plaque is, how it hardens into tartar, why professional cleaning is needed.</li>
+            <li><strong>Gum disease (gingivitis):</strong> Signs — bleeding gums, swollen gums. Cause: plaque at the gum line. Reversible with proper brushing and flossing.</li>
+            <li><strong>Flossing technique:</strong> Proper flossing method introduced. Why toothbrush cannot reach between teeth.</li>
+            <li><strong>Nutrition and dental health:</strong> Calcium (RDA 1000–1300mg for this age group), Vitamin D (required for calcium absorption), fluoride.</li>
+            <li><strong>Diet timing:</strong> It is not just what you eat but when and how often. Sipping sweet drinks all day = constant acid attack.</li>
+            <li><strong>Orthodontics:</strong> What braces are and why some children need them — not cosmetic but functional. How to maintain hygiene with braces.</li>
+            <li><strong>Teeth grinding (bruxism):</strong> Often stress-related. Signs, consequences, when to seek help.</li>
+            <li><strong>Disclosing tablets:</strong> Used to reveal plaque — students brush normally, then use tablet to see missed areas. Self-directed improvement.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Plaque Disclosure:</strong> Students brush, then use a disclosing tablet. Pink/red areas show missed plaque. Re-brush. Compare before/after. Transformative for brushing habits.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Label Reading — Dental Edition:</strong> Students read sugar content on popular snacks and drinks. Calculate daily sugar exposure. Compare to WHO recommended maximum (25g/day).</p></div>
+            <div class="activity-card"><div class="at">Activity 3</div><p><strong>Annual Dental Camp:</strong> School-hosted dental checkup by PHC partner dentist. Every student gets a basic dental screening and a take-home report.</p></div>
+            <div class="activity-card"><div class="at">Activity 4</div><p><strong>Flossing Practice:</strong> Each student gets a piece of dental floss. Step-by-step guided practice. Many will never have flossed before.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUTRITION B -->
+      <div class="topic" id="b-nutrition">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🥗</span>
+          <div class="topic-head-text"><h3>Nutrition Science</h3><p>Macronutrients, micronutrients, BMI, gut health, reading labels</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Macronutrients:</strong> Proteins (amino acids — complete vs incomplete, animal vs plant), Carbohydrates (simple vs complex, glycaemic index basics), Fats (saturated, unsaturated, trans fats — which are which in Indian diet)</li>
+            <li><strong>Protein in growth:</strong> Ages 10–14 need ~0.9g/kg/day. Why muscles, enzymes, hormones, and immunity all need protein. Best Indian sources: dal, paneer, soya, eggs, milk, sprouts.</li>
+            <li><strong>Micronutrients critical for this age:</strong> Iron (especially girls — menstrual loss), Calcium (peak bone building years), Zinc (immunity, puberty), Iodine (thyroid, brain development), Vitamin D (bone + immunity — most Indian urban children are deficient)</li>
+            <li><strong>BMI:</strong> Body Mass Index = weight(kg) / height(m)². Age-specific percentiles for children (not adult BMI). What it measures (body size ratio), what it doesn't measure (body composition).</li>
+            <li><strong>Obesity awareness:</strong> India has 14.4 million obese children — second highest globally. Cause: ultra-processed food + sedentary behaviour + genetics. Not a moral failing. Health consequences: insulin resistance, joint stress, sleep apnea, mental health.</li>
+            <li><strong>The Gut Microbiome:</strong> 100 trillion bacteria in the gut. Diversity = health. Fibre feeds good bacteria. Antibiotics kill good and bad bacteria. Probiotics (curd, buttermilk, idli, dosa) restore balance.</li>
+            <li><strong>Hydration:</strong> Urine colour chart as a hydration guide. Coffee and tea dehydrate. Cold drinks have 10 teaspoons of sugar per 330ml can.</li>
+            <li><strong>Reading nutrition labels:</strong> Per 100g vs per serving sleight of hand. Added sugar, saturated fat, sodium — what to look for.</li>
+            <li><strong>Fad diets and myths:</strong> Keto, GM diet, starvation — why they don't work for growing children. "Detox" is not a real biological process.</li>
+            <li><strong>Canteen audit:</strong> Students assess their school canteen offerings against nutritional guidelines and make suggestions for healthier options.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Protein Meter:</strong> Daily food log of protein intake vs target. Students track for one week and identify their protein gap. Use the PHC app tracker.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Design Your Thali:</strong> Using food cards, students build a balanced Indian thali that meets macronutrient and micronutrient targets for their age group.</p></div>
+            <div class="activity-card"><div class="at">Activity 3</div><p><strong>Label Reading Lab:</strong> 10 popular packaged foods. Students read labels, identify hidden sugars, calculate per-portion sugar, and rank from healthiest to least healthy.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITNESS B -->
+      <div class="topic" id="b-fitness">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💪</span>
+          <div class="topic-head-text"><h3>Physical Fitness</h3><p>Fitness components, exercise types, home workouts, sedentary risk</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>5 components of fitness:</strong> Cardiovascular endurance, muscular strength, muscular endurance, flexibility, body composition</li>
+            <li><strong>Aerobic vs anaerobic:</strong> Aerobic (with oxygen — running, swimming, cycling). Anaerobic (without — sprinting, weight training). Both are needed.</li>
+            <li><strong>Safe strength training for 10–14:</strong> Bodyweight exercises are safe and effective. Free weights safe after puberty with guidance. Machines safe with supervision. No concern about "stunting growth" — this is a myth.</li>
+            <li><strong>Exercises at home (no equipment):</strong> Push-ups, squats, lunges, planks, jumping jacks, mountain climbers, glute bridges. Progressions for each.</li>
+            <li><strong>Flexibility and mobility:</strong> Static vs dynamic stretching. When to stretch (after warm-up, after exercise — not cold muscles). Yoga asanas as flexibility training.</li>
+            <li><strong>Sedentary behaviour risk:</strong> Sitting for more than 2 consecutive hours is an independent health risk even if you exercise. The importance of movement breaks.</li>
+            <li><strong>Fitness assessment (baseline):</strong> Step test (cardiovascular), push-up count (upper body), flexibility test (sit-and-reach), BMI. Results are personal — not compared between students.</li>
+            <li><strong>FITT principle:</strong> Frequency, Intensity, Time, Type — a simple framework for planning exercise</li>
+            <li><strong>Injury prevention:</strong> Warm-up (5–10 min dynamic movement), cool-down (5 min static stretch), hydration, proper footwear, rest days</li>
+            <li><strong>Sport as social health:</strong> Team sports build communication, cooperation, resilience. Individual sports build self-discipline. Both are valuable.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PUBERTY B -->
+      <div class="topic" id="b-puberty">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🌸</span>
+          <div class="topic-head-text"><h3>Puberty & Body Changes</h3><p>Hormones, physical changes, emotional changes, body image</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="note-box"><strong>Delivery note:</strong> Boys and girls in separate groups for core content. Same-gender facilitator required. Emphasise: all bodies develop at different times — all timelines are normal.</div>
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>What is puberty:</strong> The body's transition from child to adult under direction of hormones. It is not a problem — it is biology.</li>
+            <li><strong>Hormones:</strong> Oestrogen and progesterone (girls), testosterone (boys), GnRH (both) — what they are and what they trigger</li>
+            <li><strong>Physical changes — girls:</strong> Breast development (Tanner stages), pubic/underarm hair, growth spurt, hip widening, body fat redistribution, onset of menstruation, vaginal discharge (normal)</li>
+            <li><strong>Physical changes — boys:</strong> Testicular growth, penile growth, pubic/underarm/facial hair, voice breaking, muscle development, growth spurt, ejaculation/nocturnal emissions (normal and not shameful)</li>
+            <li><strong>Changes in both:</strong> Acne, body odour, emotional volatility, increased sexual curiosity (normal)</li>
+            <li><strong>Timeline:</strong> Girls typically begin puberty 8–13 years, boys 9–14 years. Completing puberty takes 2–5 years. Early and late developers — both completely normal.</li>
+            <li><strong>Body image:</strong> What it is (how we see and feel about our bodies). The media's unrealistic standards. Body comparison and its mental health effects.</li>
+            <li><strong>Body neutrality:</strong> Moving from "I hate my body" or "I love my body" to "My body does incredible things for me."</li>
+            <li><strong>Height and weight changes:</strong> Growth spurts, appetite increases, sleep requirement increases — all normal. Not "greedy" or "lazy."</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MENSTRUAL B -->
+      <div class="topic" id="b-menstrual">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🩸</span>
+          <div class="topic-head-text"><h3>Menstrual Health & Hygiene</h3><p>Cycle awareness, products, Pee Safe kits, common concerns</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="note-box"><strong>Delivery note:</strong> Girls-only session for detailed content. A brief, respectful awareness session is held with boys on menstruation — to build empathy and reduce stigma. Female facilitator required.</div>
+          <div class="section-label">Content — Girls</div>
+          <ul class="content-list">
+            <li><strong>The menstrual cycle:</strong> 4 phases — menstruation, follicular, ovulation, luteal. Average cycle 21–35 days. What happens hormonally in each phase.</li>
+            <li><strong>Period basics:</strong> Duration 2–7 days. Blood volume 30–80ml per cycle. Brown/dark blood at start/end — normal. Clots — small clots normal; large clots see a doctor.</li>
+            <li><strong>Sanitary products — full comparison:</strong>
+              <ul class="sub-list">
+                <li><strong>Sanitary napkins (pads):</strong> Most common in India. Change every 4–6 hours. Dispose in bins with paper wrap. Never flush.</li>
+                <li><strong>Tampons:</strong> Internal. Change every 4–8 hours max (Toxic Shock Syndrome risk if left longer). Require practice to insert.</li>
+                <li><strong>Menstrual cups:</strong> Reusable, cost-effective, eco-friendly. 8–12 hours between emptying. 3–6 month learning curve but highly effective.</li>
+                <li><strong>Period underwear:</strong> Absorbent underwear. Best as backup or for light days. Wash and reuse.</li>
+              </ul>
+            </li>
+            <li><strong>Menstrual hygiene:</strong> Change every 4–6 hours (even light flow — bacteria multiply in warm blood). Wash hands before and after handling products. Bathe daily during period — no restriction. Wear breathable cotton underwear.</li>
+            <li><strong>Period pain (dysmenorrhea):</strong> Prostaglandins cause uterine contractions → cramps. Heat pad, hydration, light movement help. Ibuprofen/mefenamic acid can be used under parent/doctor guidance. Severe pain = see a doctor (possible endometriosis).</li>
+            <li><strong>PMS:</strong> Premenstrual Syndrome — mood changes, bloating, breast tenderness, fatigue in the luteal phase. Caused by hormone fluctuations. Exercise, reduced salt/caffeine, adequate sleep help.</li>
+            <li><strong>Irregular periods:</strong> Normal in the first 1–2 years after menarche. After that, consult a doctor for cycles under 21 or over 35 days, very heavy flow, or missed periods.</li>
+            <li><strong>Period myths debunked:</strong> No restrictions on bathing, exercise, eating certain foods, or visiting religious places. None of these have any medical basis.</li>
+            <li><strong>Period at school:</strong> What to do if your period starts unexpectedly. Spare pad in bag. How to ask a female teacher for help. Using the sick room.</li>
+          </ul>
+          <div class="pee-safe-box">
+            <div class="ps-head">🩷 Pee Safe School Sanitary Kit — PHC Programme</div>
+            <p>Every girl student from Class 6 onwards receives an annual <strong>Pee Safe PHC Sanitary Kit</strong> at the start of the school year containing: a 7-day supply of sanitary napkins, a hygiene pouch, a menstrual health information card, and a <strong>Pee Safe toilet seat sanitizer spray</strong> for use in school toilets. Pee Safe vending machines are installed in girls' toilets in schools with 200+ girl students. A Pee Safe representative conducts one annual in-school menstrual health awareness session. The programme removes the access barrier to menstrual hygiene products for all girls in PHC schools.</p>
+          </div>
+          <div class="section-label">Content — Boys (Awareness Session)</div>
+          <ul class="content-list">
+            <li>Menstruation is a normal biological process that half of all people experience</li>
+            <li>Period pain is real. It can be as intense as a minor heart attack in severe cases.</li>
+            <li>How to be a supportive friend — don't mock, don't make jokes, be helpful</li>
+            <li>Buying sanitary products for a family member is a normal, helpful act</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SAFETY B -->
+      <div class="topic" id="b-safety">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🛡️</span>
+          <div class="topic-head-text"><h3>Sexual Safety & Body Rights</h3><p>POCSO, consent basics, online safety, recognising unsafe situations</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Body autonomy:</strong> Your body belongs to you at every age. No adult, relative, friend, or authority figure has the right to touch you in a way that feels wrong.</li>
+            <li><strong>POCSO Act 2012:</strong> Protection of Children from Sexual Offences. Any sexual act with a person under 18 is a crime in India regardless of consent. Children should know this law exists to protect them.</li>
+            <li><strong>Consent:</strong> An enthusiastic, ongoing, and freely given "yes." Silence is not consent. Saying yes once doesn't mean yes forever. Consent can be withdrawn at any time.</li>
+            <li><strong>Grooming awareness:</strong> How adults who intend harm gain a child's trust over time — gifts, secrecy, isolation from family. Recognising grooming patterns.</li>
+            <li><strong>Online safety:</strong> Never share personal photos, location, school name, or home address with strangers online. Fake profiles are common. Screenshotting and sharing of private images is a crime (IT Act + POCSO).</li>
+            <li><strong>What to do if something happens:</strong> Tell a trusted adult immediately. You will not be punished. The adult is responsible, not you. Keep telling until someone listens.</li>
+            <li><strong>Helplines:</strong> Childline India — 1098 (free, 24/7). iCall — 9152987821.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MENTAL B -->
+      <div class="topic" id="b-mental">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧠</span>
+          <div class="topic-head-text"><h3>Mental Health</h3><p>Stress, anxiety awareness, sleep, help-seeking</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Mental health definition:</strong> "A state of wellbeing in which every individual realises their potential, can cope with normal stresses, can work productively, and is able to make a contribution to the community." (WHO) — not just absence of illness.</li>
+            <li><strong>Stress physiology:</strong> HPA axis activation — hypothalamus → pituitary → adrenal glands → cortisol + adrenaline. Fight/flight/freeze. Good stress (eustress) vs harmful chronic stress (distress).</li>
+            <li><strong>Exam stress:</strong> Moderate stress improves performance (Yerkes-Dodson curve). Too much stress impairs memory and concentration. Practical management: schedule, breaks, sleep.</li>
+            <li><strong>Anxiety basics:</strong> Worry that is disproportionate to the threat. Physical symptoms (racing heart, sweating, tight chest). Different from normal nervousness.</li>
+            <li><strong>Social anxiety:</strong> Fear of being judged or embarrassed in social situations. Very common at this age. Does not mean something is wrong with you.</li>
+            <li><strong>Sleep and mental health:</strong> Sleep deprivation causes anxiety, irritability, poor concentration, low mood. 9–11 hours for ages 10–14. Blue light from screens suppresses melatonin — screen off 1 hour before bed.</li>
+            <li><strong>Stress relief tools:</strong> 4-7-8 breathing, 5-4-3-2-1 grounding, journaling, exercise, talking to someone, spending time in nature</li>
+            <li><strong>When to get help:</strong> If stress/anxiety lasts more than 2 weeks, interferes with school, eating, or sleep, or feels overwhelming — tell a parent, teacher, or school counsellor.</li>
+            <li><strong>Reducing stigma:</strong> Going to a psychologist is like going to a doctor for a fever. Mental illness is not weakness, laziness, or drama.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EMOTIONAL B -->
+      <div class="topic" id="b-emotions">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">😌</span>
+          <div class="topic-head-text"><h3>Emotional Health & EQ</h3><p>Emotional vocabulary, self-regulation, empathy, resilience</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Emotional intelligence (EQ):</strong> Four domains — self-awareness, self-management, social awareness, relationship management. Research shows EQ predicts life success better than IQ.</li>
+            <li><strong>Expanding emotional vocabulary:</strong> Beyond happy/sad/angry — frustrated, overwhelmed, disappointed, proud, content, envious, embarrassed, humiliated, nostalgic. Naming accurately → managing better.</li>
+            <li><strong>Emotional regulation:</strong> Pause before reacting. STOP technique: Stop, Take a breath, Observe what you're feeling, Proceed mindfully.</li>
+            <li><strong>Emotional triggers:</strong> What makes you angry? What makes you anxious? Knowing your triggers = better self-management.</li>
+            <li><strong>Resilience:</strong> The ability to recover from difficulty. Not about not feeling pain — about not being permanently broken by it. Growth mindset.</li>
+            <li><strong>Gratitude practice:</strong> 3 things I am grateful for today. Research shows consistent gratitude practice measurably improves mental health within 4 weeks.</li>
+            <li><strong>Self-compassion:</strong> Treating yourself with the same kindness you'd show a good friend when you make a mistake. Different from excusing bad behaviour.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SOCIAL B -->
+      <div class="topic" id="b-social">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🤝</span>
+          <div class="topic-head-text"><h3>Social Health</h3><p>Friendships, peer pressure, bullying, boundaries</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Social health defined:</strong> The quality of your relationships and your ability to communicate, cooperate, and set limits with others.</li>
+            <li><strong>Healthy vs toxic friendships:</strong> Healthy: mutual respect, honesty, support. Toxic: manipulation, jealousy, exclusion, making you feel bad about yourself.</li>
+            <li><strong>Peer pressure mechanics:</strong> Direct (being asked to do something) vs indirect (feeling like you must do what others do to fit in). Assertiveness without aggression.</li>
+            <li><strong>Assertiveness scripts:</strong> "I don't feel comfortable doing that." "That's not for me." "I'll think about it and let you know." — Practise saying these without apology.</li>
+            <li><strong>Bullying:</strong> Physical, verbal, social/relational, cyber. Bystander responsibility. How to support a victim without making it worse. How to report safely.</li>
+            <li><strong>Setting limits:</strong> Limits on time, touch, information you share. A limit is not rude — it is a communication of what you need.</li>
+            <li><strong>Communication skills:</strong> Active listening (eye contact, reflecting back, not interrupting). "I" statements vs "you" statements in conflict.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIGITAL B -->
+      <div class="topic" id="b-digital">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">📱</span>
+          <div class="topic-head-text"><h3>Digital Wellness</h3><p>Screen time, social media, dopamine, online safety</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Dopamine and screens:</strong> Social media is engineered to trigger dopamine (reward chemical). Variable reward schedules (like slot machines) create compulsive use. Understanding the design means you can use it intentionally.</li>
+            <li><strong>Screen time and health:</strong> WHO recommends max 2 hours recreational screen time per day for ages 10–14. Effects of excess: sleep disruption, anxiety, reduced attention span, eye strain, posture problems.</li>
+            <li><strong>Social comparison:</strong> Instagram/Reels show edited, curated highlights. Comparing your real life to others' highlight reel causes anxiety and low self-esteem. Awareness breaks the spell.</li>
+            <li><strong>Digital footprint:</strong> Everything you post, like, and share creates a permanent record. Future employers and universities can see it. Digital hygiene = thinking before posting.</li>
+            <li><strong>Online identity and safety:</strong> What to share vs not share (location, school, photos, home address). Stranger danger extends to the internet. Verification: most "teen" strangers online are not teens.</li>
+            <li><strong>Cyberbullying:</strong> Anonymous cruelty is still cruelty. Taking screenshots as evidence. Blocking and reporting. Telling a trusted adult.</li>
+            <li><strong>Gaming health:</strong> Gaming can be social, creative, and fun. Signs of problematic gaming: losing sleep, ignoring food, angry when asked to stop, losing interest in other activities.</li>
+            <li><strong>Digital detox:</strong> A planned break from screens. Not punishment — a conscious reset. What can you do instead? A 24-hour challenge.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- YOGA B -->
+      <div class="topic" id="b-yoga">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧘</span>
+          <div class="topic-head-text"><h3>Yoga & Mindfulness</h3><p>Formal asanas, pranayama, meditation introduction</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Yoga philosophy:</strong> 8 limbs of Patanjali (Ashtanga) — Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi. Asanas are just one part of a complete system.</li>
+            <li><strong>Sun Salutation (Surya Namaskar — 12 steps):</strong> Full sequence with breath alignment. 5 rounds = effective cardiovascular and flexibility workout.</li>
+            <li><strong>Standing asanas:</strong> Tadasana, Trikonasana, Virabhadrasana I & II, Parsvakonasana, Garudasana</li>
+            <li><strong>Seated and supine asanas:</strong> Paschimottanasana, Janu Sirsasana, Setu Bandhasana, Bhujangasana, Dhanurasana, Shavasana</li>
+            <li><strong>Pranayama:</strong> Anulom Vilom (alternate nostril — balances hemispheres, calms anxiety), Kapalabhati (skull shining — energising, clears respiratory tract), Bhramari (humming bee — rapidly reduces anxiety and blood pressure)</li>
+            <li><strong>Mindfulness:</strong> Paying attention to the present moment without judgment. 5-minute daily practice: breath awareness. Mindful eating — eating one raisin or piece of fruit with full attention.</li>
+            <li><strong>Yoga Nidra:</strong> Guided body scan relaxation (15 min). Evidence shows equivalent to 2–3 hours of sleep for the nervous system. Ideal for exam stress.</li>
+            <li><strong>Yoga for specific concerns:</strong> Anxiety sequence, headache-relief sequence, backache (from school bags) sequence, energy-boosting morning sequence</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MORAL B -->
+      <div class="topic" id="b-moral">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">⭐</span>
+          <div class="topic-head-text"><h3>Moral Health & Values</h3><p>Integrity, responsibility, character, ethical decisions</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Why moral health matters:</strong> Psychological research shows that living in alignment with your values reduces anxiety and increases wellbeing. Moral health is health.</li>
+            <li><strong>Integrity:</strong> Doing the right thing when nobody is watching. The gap between who you are in public and who you are in private. Consistency as a value.</li>
+            <li><strong>Accountability:</strong> Taking responsibility for your actions without blaming others. Apology vs excuse. Repairing relationships after harm.</li>
+            <li><strong>Decision-making:</strong> The pause before acting. Weighing consequences. "How will I feel about this in a week? A year?"</li>
+            <li><strong>Justice and fairness:</strong> Recognising when something is unfair — and what your responsibility is when you see injustice.</li>
+            <li><strong>Giving back:</strong> Volunteering, mentoring, community service — the mental health benefits of contribution. PHC Health Prefect programme.</li>
+            <li><strong>Environmental responsibility:</strong> Waste segregation, water conservation, not polluting — daily choices connected to moral health.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FINANCIAL B -->
+      <div class="topic" id="b-financial">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💰</span>
+          <div class="topic-head-text"><h3>Financial Health Awareness</h3><p>Saving, spending, pocket money, financial stress and health</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Financial stress and health:</strong> Financial stress is one of the top causes of adult anxiety, depression, and even physical illness (hypertension, sleep disorders). Building good habits at 12 changes adult outcomes.</li>
+            <li><strong>Needs vs wants (deeper):</strong> A smartphone is a want. Food is a need. But in 2026, a basic phone might be a need for learning. Contextual thinking about financial priorities.</li>
+            <li><strong>Pocket money management:</strong> Save-Spend-Give framework. 50% save, 30% spend on wants, 20% give/invest. Practice with whatever amount they receive.</li>
+            <li><strong>Savings account:</strong> How a savings account works. Interest — simple explanation. Compound interest introduction: money earning money.</li>
+            <li><strong>Advertising and spending:</strong> How ads are designed to make you want things. Impulse buying. The 24-hour rule (wait before buying anything non-essential).</li>
+            <li><strong>UPI and digital money safety:</strong> Never share OTP, PIN, or password — with anyone, including someone claiming to be from a bank. Common scams targeting teenagers.</li>
+            <li><strong>Health and money connection:</strong> Eating healthily now costs less than treating disease later. Prevention is financially smarter than cure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ENVIRONMENT B -->
+      <div class="topic" id="b-environment">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🌿</span>
+          <div class="topic-head-text"><h3>Environmental Health</h3><p>Pollution, water, air quality, sustainable choices</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Air pollution and health:</strong> PM2.5 particles enter the lungs and bloodstream. Delhi's AQI regularly exceeds safe levels by 10–15x. Long-term effects: asthma, reduced lung capacity, cardiovascular disease, cognitive impairment in children.</li>
+            <li><strong>Water quality:</strong> Water-borne diseases — cholera, typhoid, hepatitis A. Indicators of clean water. Water treatment — boiling, filtration, RO, UV. Waterborne disease burden in India.</li>
+            <li><strong>Noise pollution:</strong> Decibel levels. Earphone use and hearing damage — WHO warns 1.1 billion young people at risk. 60:60 rule (60% volume, 60 minutes max).</li>
+            <li><strong>Single-use plastic and health:</strong> Microplastics now found in human blood, breast milk, and placentas. What individual action looks like: refillable bottles, cloth bags.</li>
+            <li><strong>Green spaces and mental health:</strong> Spending 2 hours per week in nature measurably improves mental health (research-backed). School garden, local park.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end content-col -->
+  </div>
+</div><!-- end basic tab -->
+
+<!-- =================== ADVANCED =================== -->
+<div id="tab-advanced" class="tab-panel">
+  <div class="syllabus-wrap">
+    <div class="index-col">
+      <div class="index-box">
+        <h3>Content Index</h3>
+        <a href="#a-intro">Level Overview</a>
+        <div class="i-sep"></div>
+        <a href="#a-hygiene">🧼 Advanced Hygiene</a>
+        <a href="#a-dental">🦷 Dental & Oral Health</a>
+        <a href="#a-nutrition">🥗 Advanced Nutrition</a>
+        <a href="#a-fitness">💪 Sports Science</a>
+        <a href="#a-sexual">❤️ Sexual & Repro Health</a>
+        <a href="#a-menstrual">🩸 Advanced Menstrual</a>
+        <a href="#a-mental">🧠 Mental Health Deep</a>
+        <a href="#a-relationships">💞 Relationships</a>
+        <a href="#a-digital">📱 Digital Wellness</a>
+        <a href="#a-yoga">🧘 Advanced Yoga</a>
+        <a href="#a-financial">💰 Financial Health</a>
+        <a href="#a-career">🎯 Career & Life Wellness</a>
+        <a href="#a-environment">🌿 Environmental Health</a>
+        <a href="#a-moral">⭐ Moral Leadership</a>
+      </div>
+    </div>
+    <div class="content-col">
+      <div class="level-intro" id="a-intro">
+        <div class="lhead"><span class="licon">📘</span>
+          <h2>Advanced Level<span>Class 9 to 12 · Ages 14 to 18</span></h2>
+        </div>
+        <p style="font-size:13px;color:var(--dgray);line-height:1.7;">Advanced is the deepest, most independent, and most life-applicable level. Students at this age are navigating board exams, identity formation, romantic feelings, career decisions, and the transition to adulthood. The curriculum is peer-discussion-heavy, evidence-based, and designed to produce graduates who are genuinely health-literate adults — not just students who passed a health quiz. Every topic is framed as a life-skills investment.</p>
+        <div class="level-meta">
+          <div class="lm"><div class="lk">Approach</div><div class="lv">Peer Discussion + Research</div></div>
+          <div class="lm"><div class="lk">Session Length</div><div class="lv">40–50 min per session</div></div>
+          <div class="lm"><div class="lk">Key Method</div><div class="lv">Case studies, debates, projects</div></div>
+          <div class="lm"><div class="lk">Assessment</div><div class="lv">Portfolio + Capstone Project</div></div>
+        </div>
+      </div>
+
+      <!-- HYGIENE A -->
+      <div class="topic" id="a-hygiene">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧼</span>
+          <div class="topic-head-text"><h3>Advanced Hygiene & Infection Control</h3><p>Immunology basics, communicable disease, hygiene in adult life</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Immune system basics:</strong> Innate vs adaptive immunity. Lymphocytes (T-cells, B-cells), antibodies, inflammation as a protective response. How vaccines work — herd immunity.</li>
+            <li><strong>Communicable disease transmission:</strong> R0 (basic reproduction number) explained simply. How hygiene behaviour affects population-level disease spread — India's post-COVID context.</li>
+            <li><strong>Skin microbiome:</strong> The 1.8m² skin surface has 1 million bacteria per cm². The right bacteria protect us. Over-washing, harsh soaps, and antibacterial products disrupt it.</li>
+            <li><strong>Sexual hygiene:</strong> Genital hygiene basics (without shame or excess detail). Urinary tract infection (UTI) prevention — especially relevant for girls (wipe front to back, urinate after sex, stay hydrated). Testicular self-examination for boys.</li>
+            <li><strong>Workplace and adult hygiene:</strong> Food safety basics (cooking temperatures, refrigeration, hand hygiene when cooking), respiratory hygiene in shared spaces, hygiene on public transport</li>
+            <li><strong>Antibiotic resistance:</strong> Why finishing antibiotic courses matters. Why taking antibiotics for viral infections is harmful. India's AMR (antimicrobial resistance) crisis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DENTAL A -->
+      <div class="topic" id="a-dental">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🦷</span>
+          <div class="topic-head-text"><h3>Dental & Oral Health</h3><p>Systemic links, wisdom teeth, orthodontics, oral cancer awareness</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Oral-systemic health link:</strong> Gum disease bacteria (Porphyromonas gingivalis) have been found in atherosclerotic plaques, Alzheimer's disease brain tissue, and are linked to preterm birth and diabetes complications. Your mouth is connected to your whole body.</li>
+            <li><strong>Advanced gum disease (periodontitis):</strong> Irreversible bone loss around teeth. Prevention is critical — gingivitis → periodontitis progression. Symptoms: receding gums, tooth loosening, persistent bad breath.</li>
+            <li><strong>Wisdom teeth:</strong> Third molars erupt 17–25. Impaction — why some need extraction. What to expect and when to see a dentist.</li>
+            <li><strong>Oral cancer awareness:</strong> India has the highest rate of oral cancer in the world — largely tobacco and gutka-related. Signs: persistent white or red patches in the mouth, ulcers not healing in 2 weeks, numbness. Early detection = high survival.</li>
+            <li><strong>Tobacco and oral health:</strong> Smoking stains teeth, causes gum disease, dry socket after extractions, and is the primary cause of oral cancer. Smokeless tobacco (gutka, khaini, pan masala) equally damaging.</li>
+            <li><strong>Cosmetic dentistry literacy:</strong> Teeth whitening — safe vs unsafe methods. Veneers, aligners — what they are, realistic expectations, cost awareness.</li>
+            <li><strong>Dental anxiety:</strong> 36% of people avoid the dentist due to fear. Understanding procedures reduces fear. Dentists are not there to hurt you — quite the opposite.</li>
+            <li><strong>Adult preventive routine:</strong> Brush 2x/day, floss 1x/day, tongue scraper, mouthwash (when appropriate), 6-monthly dental checkup, annual scaling/cleaning, pit and fissure sealants if needed.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NUTRITION A -->
+      <div class="topic" id="a-nutrition">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🥗</span>
+          <div class="topic-head-text"><h3>Advanced Nutrition Science</h3><p>Body composition, metabolism, eating disorders, supplements</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Body composition analysis:</strong> Fat mass vs fat-free mass. DEXA scan vs bioimpedance vs skinfold. Why BMI alone is inadequate. Body fat percentage ranges for health.</li>
+            <li><strong>Metabolism:</strong> Basal Metabolic Rate (BMR) — Harris-Benedict equation. Total Daily Energy Expenditure (TDEE). Why crash diets lower metabolic rate. Adaptive thermogenesis.</li>
+            <li><strong>Obesity mechanisms:</strong> Leptin and ghrelin — the satiety and hunger hormones. Insulin resistance — the gateway to Type 2 diabetes. Sleep and obesity link (sleep deprivation raises ghrelin). Gut microbiome and weight regulation.</li>
+            <li><strong>Eating disorders:</strong> Anorexia Nervosa (restrictive), Bulimia Nervosa (binge-purge), Binge Eating Disorder, ARFID (Avoidant Restrictive Food Intake Disorder), Orthorexia. Prevalence in Indian urban adolescents rising. Recognition, destigmatisation, support pathways.</li>
+            <li><strong>Supplements — evidence review:</strong>
+              <ul class="sub-list">
+                <li><strong>Protein powder:</strong> Useful only if dietary protein is genuinely insufficient. Food-first always. Whey vs plant protein.</li>
+                <li><strong>Creatine:</strong> Best-researched supplement for strength. Safe for post-puberty adolescents. Not a steroid.</li>
+                <li><strong>Vitamin D:</strong> 80% of urban Indians are deficient. 1000–2000 IU/day is safe and often needed.</li>
+                <li><strong>Iron:</strong> Only supplement if deficient (blood test required). Iron excess is toxic.</li>
+                <li><strong>Mass gainers, pre-workouts, fat burners:</strong> Generally unnecessary, often harmful for adolescents. Understand what is in them.</li>
+              </ul>
+            </li>
+            <li><strong>Nutrition for cognitive performance:</strong> Omega-3 (DHA) for brain function. Breakfast and academic performance. Caffeine — effects, safe limits, dependency risk for adolescents.</li>
+            <li><strong>Nutrition myths at this age:</strong> "Eating fat makes you fat." "Carbs are bad." "You need protein immediately after exercise." Evaluating nutritional claims.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FITNESS A -->
+      <div class="topic" id="a-fitness">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💪</span>
+          <div class="topic-head-text"><h3>Sports Science & Physical Performance</h3><p>Muscle science, strength training, recovery, PEDs</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Muscle physiology:</strong> Sarcomeres, myosin/actin, fast-twitch vs slow-twitch fibres. How muscles grow (hypertrophy) — mechanical tension, metabolic stress, muscle damage. Supercompensation cycle.</li>
+            <li><strong>Strength training science:</strong> Progressive overload principle. Rep ranges — 1-5 (strength), 6-12 (hypertrophy), 12-20 (endurance). Compound vs isolation exercises. Why form matters more than weight.</li>
+            <li><strong>Cardiovascular science:</strong> VO2 max — what it is and why it matters. Heart rate zones — fat burning, aerobic, anaerobic, VO2 max zones. How to train each zone.</li>
+            <li><strong>Sports injuries — recognition and management:</strong> Muscle strain vs ligament sprain vs bone stress fracture. RICE protocol (Rest, Ice, Compression, Elevation). When to play through pain vs when to stop. Concussion protocol.</li>
+            <li><strong>Recovery science:</strong> Sleep (GH release during Stage 3 sleep). Protein timing. Active recovery. Cold therapy (ice baths) — evidence and limitations. Foam rolling.</li>
+            <li><strong>Steroids and PEDs (performance-enhancing drugs):</strong> How anabolic steroids work. Short-term effects (performance). Long-term effects: liver damage, cardiovascular damage, hormonal disruption, stunted growth if used before epiphyseal closure, psychological effects (roid rage). Banned in all sports. Not worth it.</li>
+            <li><strong>Designing a personal programme:</strong> 12-week personal fitness project — goal setting, periodisation, tracking, assessment. Presented as capstone project.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SEXUAL A -->
+      <div class="topic" id="a-sexual">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">❤️</span>
+          <div class="topic-head-text"><h3>Sexual & Reproductive Health</h3><p>Consent, STIs, healthy relationships, LGBTQ+ awareness</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="note-box"><strong>Delivery note:</strong> Class 9–10: focus on consent, relationship health, reproductive anatomy, STI awareness (conceptual). Class 11–12: deeper content including contraception awareness. Separate sessions by gender for sensitive topics. Female facilitator for girls, male for boys. All content reviewed by gynaecologist and psychologist before delivery.</div>
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Reproductive anatomy (complete):</strong> Female — ovaries, fallopian tubes, uterus, cervix, vagina. Male — testes, epididymis, vas deferens, seminal vesicles, prostate, penis. Function of each.</li>
+            <li><strong>Consent (advanced):</strong> Affirmative, enthusiastic, ongoing, freely given, revocable consent. Power dynamics — why consent with a teacher, employer, or someone with authority over you is inherently problematic. Age of consent in India (18). POCSO.</li>
+            <li><strong>STI awareness:</strong> HIV (transmission, prevention, treatment, undetectable = untransmittable — U=U), HPV (most common STI, vaccine available — girls should receive it), Chlamydia (often asymptomatic), Herpes, Syphilis. Awareness without fear. The only comprehensive prevention is a combination of correct information + access to testing.</li>
+            <li><strong>Contraception awareness (Class 11–12):</strong> Types — condoms (only method that protects against both pregnancy and STIs), oral contraceptive pills, emergency contraception, IUDs. This is awareness education, not encouragement of sexual activity.</li>
+            <li><strong>LGBTQ+ inclusion:</strong> Sexual orientation and gender identity are natural variations, not choices. Section 377 decriminalisation (2018). Students may have LGBTQ+ friends, family, or identify themselves. The health impact of rejection and stigma on LGBTQ+ youth. Allyship.</li>
+            <li><strong>Healthy vs unhealthy relationships:</strong> Love does not include control, jealousy, isolation, or fear. Red flags: checking your phone, controlling your friendships, making you feel guilty for spending time with family.</li>
+            <li><strong>Online sexual safety:</strong> Sexting — legal risks under IT Act + POCSO even between teenagers. Non-consensual sharing of images — cybercrime. Online pornography — what it is and is not (performance, not reality, often harmful to expectations).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MENSTRUAL A -->
+      <div class="topic" id="a-menstrual">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🩸</span>
+          <div class="topic-head-text"><h3>Advanced Menstrual Health</h3><p>Cycle tracking, endometriosis, PCOS, Pee Safe advanced</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content — Girls</div>
+          <ul class="content-list">
+            <li><strong>Cycle tracking:</strong> Apps (Flo, Clue) for tracking cycle regularity, symptoms, mood patterns. Understanding the four phases and how energy, mood, and focus change through the month — working with your cycle not against it.</li>
+            <li><strong>PCOS (Polycystic Ovary Syndrome):</strong> Affects 1 in 10 Indian women. Symptoms: irregular periods, acne, excess hair growth, weight gain, difficulty conceiving. Managed (not cured) through lifestyle changes — exercise, low GI diet, stress management. Early diagnosis matters.</li>
+            <li><strong>Endometriosis:</strong> Affects 1 in 10 women. Extremely underdiagnosed — average diagnosis takes 7–10 years. Severe period pain is NOT normal. Students should know the word and symptom so they can advocate for themselves.</li>
+            <li><strong>Menstrual cup mastery:</strong> Full insertion and removal technique. Sterilisation between cycles. Cost-benefit analysis vs disposables. Environmental impact.</li>
+            <li><strong>Period and exercise:</strong> Research shows moderate exercise improves period pain. Sports and periods — managing sport participation during menstruation. No restrictions on swimming with tampon or cup.</li>
+            <li><strong>Nutrition and menstruation:</strong> Iron replenishment post-period. Magnesium for PMS (dark chocolate, leafy greens). Omega-3 for inflammation/pain reduction. Foods to limit (caffeine, excess salt worsens bloating).</li>
+            <li><strong>Fertility awareness:</strong> Basic understanding of the fertile window — not for contraception (unreliable without training) but for self-knowledge and reproductive health literacy.</li>
+          </ul>
+          <div class="pee-safe-box">
+            <div class="ps-head">🩷 Pee Safe Advanced Programme</div>
+            <p>Class 11–12 girls are introduced to the full range of Pee Safe products — menstrual cups, period underwear, intimate wash, and toilet hygiene products. Pee Safe's menstrual health educator conducts a 1-hour in-depth session. Students are encouraged to educate their families and communities about menstrual hygiene — a key part of PHC's community health ripple effect.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENTAL A -->
+      <div class="topic" id="a-mental">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧠</span>
+          <div class="topic-head-text"><h3>Mental Health — Deep Dive</h3><p>Disorders, therapy, neuroscience, board exam psychology</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Neuroscience of mental health:</strong> The brain's key structures — prefrontal cortex (decision-making, not fully developed until age 25), amygdala (emotion processing, hyperactive in adolescence), hippocampus (memory, damaged by chronic stress). Why teenagers genuinely think and feel differently from adults.</li>
+            <li><strong>Depression:</strong> Diagnostic criteria (DSM-5 simplified). Monoamine hypothesis. Why "just be positive" is harmful advice. Prevalence — 14% of Indian adolescents. Treatment: therapy + medication when appropriate + lifestyle factors.</li>
+            <li><strong>Anxiety disorders:</strong> GAD, Social Anxiety, Panic Disorder, OCD, PTSD — distinctions and commonalities. Cognitive Behavioural Therapy (CBT) — how it works. Exposure therapy concept.</li>
+            <li><strong>Self-harm awareness:</strong> Why people self-harm (emotional regulation, not attention-seeking). What to do if a friend discloses self-harm. School referral protocol. Childline 1098.</li>
+            <li><strong>Suicidal ideation:</strong> Warning signs. The importance of asking directly ("Are you thinking about suicide?"). It does not plant the idea — it opens the door. School counsellor referral immediately.</li>
+            <li><strong>Seeking therapy:</strong> What therapy is (and isn't). Types — CBT, DBT, person-centred, psychodynamic. How to find a therapist. How to ask parents. iCall, Vandrevala, Nimhans helplines.</li>
+            <li><strong>Medication awareness:</strong> Antidepressants — how SSRIs work (increasing serotonin availability). They are not addictive. They take 4–6 weeks to work. They do not change your personality. They are tools, not crutches.</li>
+            <li><strong>Board exam mental health:</strong> Cortisol curve and optimal stress for performance. Cognitive load management. Identity beyond grades — who you are is not your percentile.</li>
+            <li><strong>Indian mental health context:</strong> Cultural stigma, family pressure, career-only focus, dismissal of emotional needs. How to navigate this and still get the support you need.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RELATIONSHIPS A -->
+      <div class="topic" id="a-relationships">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💞</span>
+          <div class="topic-head-text"><h3>Relationships & Emotional Bonds</h3><p>Attachment, romantic relationships, heartbreak, family conflict</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Attachment theory:</strong> Bowlby and Ainsworth — secure, anxious-preoccupied, dismissive-avoidant, fearful-avoidant attachment styles. How your early relationships shape who you are drawn to and how you behave in relationships.</li>
+            <li><strong>Relationship anxiety:</strong> Hypervigilance to partner's behaviour. Fear of abandonment. Over-analysing messages. Jealousy. Root causes and management.</li>
+            <li><strong>Romantic relationships at this age:</strong> What is developmentally normal. Healthy expectations — companionship, shared interests, mutual respect — not completion, possession, or validation of worth.</li>
+            <li><strong>Love languages:</strong> Words of affirmation, acts of service, receiving gifts, quality time, physical touch (Chapman). Understanding your own and others' languages reduces conflict.</li>
+            <li><strong>Breakups and heartbreak:</strong> The neuroscience of heartbreak — brain processes romantic rejection similarly to physical pain (fMRI research). It is real. Time heals — but the grieving process is valid. What healthy recovery looks like.</li>
+            <li><strong>Toxic relationship patterns:</strong> Gaslighting, love bombing, isolation, control, emotional abuse. These can happen in any relationship — friend, romantic, family. They are not love.</li>
+            <li><strong>Parent-teen conflict:</strong> The developmental purpose of separating from parents — necessary for identity formation. How to communicate needs to parents in ways that work. The difference between healthy independence and recklessness.</li>
+            <li><strong>Loneliness vs aloneness:</strong> Loneliness (painful isolation) vs solitude (chosen restorative aloneness). The modern epidemic of loneliness in digitally connected generations. Building real social connection.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIGITAL A -->
+      <div class="topic" id="a-digital">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">📱</span>
+          <div class="topic-head-text"><h3>Digital Wellness & Tech Literacy</h3><p>Algorithm design, addiction, digital identity, AI and health</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>How social media algorithms work:</strong> Engagement maximisation — the algorithm shows you content that makes you feel strong emotions (outrage, envy, lust, fear) because those create longer sessions. Understanding this makes you a smarter user.</li>
+            <li><strong>Addictive design patterns:</strong> Infinite scroll, variable reward (like counts), streak mechanics, notification engineering — all borrowed from slot machine design. Knowing this is the first step to autonomy.</li>
+            <li><strong>Social media and body image research:</strong> Frances Haugen (Facebook whistleblower) leaked internal research showing Instagram worsened body image in 32% of girls. What the platforms know and don't tell you.</li>
+            <li><strong>Digital identity:</strong> Your online presence as a brand — or a liability. Case studies of social media posts that affected careers. The permanence of digital footprints.</li>
+            <li><strong>Privacy literacy:</strong> What apps can access (microphone, location, contacts, photos). What is sold to advertisers. How to audit app permissions.</li>
+            <li><strong>AI tools and health misinformation:</strong> Using AI responsibly for health questions. The risk of self-diagnosing on Google and AI chatbots. Why professional medical advice is irreplaceable.</li>
+            <li><strong>Screen time and the developing brain:</strong> Prefrontal cortex development continues to 25. Heavy social media use during this window may affect impulse control, attention, and decision-making long-term.</li>
+            <li><strong>Digital wellness design:</strong> Students design their own personal digital wellness protocol — phone-free times, app limits, notification settings, phone-free bedroom. Evidence-based, personal, and sustainable.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- YOGA A -->
+      <div class="topic" id="a-yoga">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🧘</span>
+          <div class="topic-head-text"><h3>Advanced Yoga & Mindfulness</h3><p>Philosophy, advanced practice, meditation styles, neuroscience</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Yoga philosophy — Patanjali's Yoga Sutras:</strong> Deep dive into Yamas (ethical restraints) and Niyamas (personal observances) as applied to student life. Santosha (contentment) in exam culture. Ahimsa (non-violence) towards one's own body and mind.</li>
+            <li><strong>Advanced asana sequences:</strong> Ashtanga Primary Series (selected poses). Iyengar precision. Yin yoga for fascia and deep tissue. Restorative yoga for nervous system recovery.</li>
+            <li><strong>Advanced pranayama:</strong> Anulom Vilom (30 rounds), Kapalabhati (108 rounds), Bhastrika (bellows breath), Sitali (cooling breath), Nadi Shodhana with retention (kumbhaka). Contra-indications for each.</li>
+            <li><strong>Meditation styles:</strong> Focused attention (single-point concentration), Open monitoring (mindfulness), Loving-Kindness (Metta), Body Scan, Visualisation. Research comparison — which styles work best for which outcomes.</li>
+            <li><strong>Neuroscience of meditation:</strong> 8 weeks of mindfulness practice measurably changes the prefrontal cortex thickness (Sara Lazar, Harvard). Amygdala reactivity decreases. HRV (heart rate variability) improves. These are measurable physical changes in the brain.</li>
+            <li><strong>Yoga Nidra (advanced):</strong> Full 30-minute practice. State between waking and sleep — theta brainwave state. Used in trauma-informed care, military PTSD treatment, athletic performance recovery.</li>
+            <li><strong>Yoga for specific health conditions:</strong> PCOS, anxiety, insomnia, back pain, menstrual pain, exam stress — evidence-based sequences for each.</li>
+            <li><strong>Yoga certification pathway:</strong> Students who complete the full Advanced yoga curriculum across 2 years receive a PHC Yoga Awareness Certificate. Those wishing to pursue teaching can be directed to AYUSH-accredited 200-hr YTT programmes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FINANCIAL A -->
+      <div class="topic" id="a-financial">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">💰</span>
+          <div class="topic-head-text"><h3>Financial Health</h3><p>Banking, insurance, compound interest, health economics, budgeting</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Financial stress and physical health:</strong> Chronic financial stress elevates cortisol → hypertension, diabetes, cardiovascular disease. People in debt have measurably worse immune function. Financial health IS health.</li>
+            <li><strong>Compound interest (deep):</strong> The eighth wonder of the world. ₹5,000/month at 12% from age 18 = ₹4.7 crore at 60. The same invested from age 30 = ₹1.5 crore. Starting 12 years earlier = 3x the wealth. This one concept, internalised at 16, changes lives.</li>
+            <li><strong>Banking products:</strong> Savings account, FD, RD, PPF, NPS — what each is, who it's for, expected returns. The difference between saving and investing.</li>
+            <li><strong>Mutual funds and SIP basics:</strong> What a mutual fund is. What SIP (Systematic Investment Plan) means. Index funds — the most evidence-based investment for most people. Do not speculate; invest.</li>
+            <li><strong>Health insurance:</strong> Why it is essential. Premium vs sum insured. Cashless hospitalisation. Pre-existing disease clauses. Family floater vs individual. PMJAY (Ayushman Bharat) — government health cover and who is eligible.</li>
+            <li><strong>Budget and cash flow:</strong> Monthly income vs expenses tracking. 50/30/20 rule — needs, wants, savings. Zero-based budgeting. Emergency fund — 6 months of expenses.</li>
+            <li><strong>Debt literacy:</strong> Good debt (education loan, home loan — asset-building) vs bad debt (credit card revolving balance — wealth-destroying). EMI trap. The psychological effects of debt on mental health.</li>
+            <li><strong>UPI, fintech, and digital safety:</strong> QR code fraud, phishing, vishing. Two-factor authentication. Never share OTP. Understanding digital transaction trails.</li>
+            <li><strong>Career and income:</strong> Understanding that the choice of career affects lifelong financial health — not just salary, but stability, growth, healthcare benefits, work stress. Choosing work you can sustain, not just the highest package.</li>
+          </ul>
+          <div class="section-label">Activities</div>
+          <div class="activity-grid">
+            <div class="activity-card"><div class="at">Activity 1</div><p><strong>Compound Interest Calculator:</strong> Students input their expected first salary, calculate what ₹2,000/month invested from day 1 of their career becomes at retirement.</p></div>
+            <div class="activity-card"><div class="at">Activity 2</div><p><strong>Budget Simulation:</strong> Students are given a fictional monthly income of ₹30,000 (entry-level salary). They must allocate rent, food, transport, insurance, savings, and discretionary spending. Shockingly illuminating.</p></div>
+            <div class="activity-card"><div class="at">Activity 3</div><p><strong>Bank Visit / Guest Session:</strong> Representative from HDFC/SBI school banking tie-up explains savings account opening, SIP basics, health insurance options for young adults.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAREER A -->
+      <div class="topic" id="a-career">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🎯</span>
+          <div class="topic-head-text"><h3>Career Wellness & Life Skills</h3><p>Work-life health, adulting skills, identity, purpose</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Career and health:</strong> Burnout — the WHO-recognised occupational syndrome. High-stress careers and their health costs. Choosing work that is sustainable over a 40-year career.</li>
+            <li><strong>Identifying your values:</strong> What matters most to you? Purpose, security, creativity, impact, freedom, family? Your values should inform your career direction, not just salary.</li>
+            <li><strong>Life skills for independence:</strong> Basic cooking for health (not just survival), first aid (CPR basics, Heimlich, wound care), reading a prescription label, navigating a hospital, making a doctor's appointment — skills most Indian school graduates lack.</li>
+            <li><strong>Identity and mental health:</strong> Identity formation is the central task of adolescence (Erikson). Multiple identities — student, son/daughter, friend, Indian, religious/non-religious. Conflict between identities. Mental health impact of identity confusion.</li>
+            <li><strong>Purpose and meaning:</strong> Viktor Frankl's logotherapy — people with a strong sense of "why" can endure almost any "how." What gives your life meaning? PHC's capstone project: a personal health manifesto.</li>
+            <li><strong>Transitions:</strong> Class 12 → college. The mental health challenge of transition — new city, new social group, loss of structure. Preparing emotionally, not just academically.</li>
+            <li><strong>Seeking help as an adult:</strong> When to see a doctor (symptoms that should never be ignored). When to see a mental health professional. How to navigate Indian healthcare systems as an independent adult.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ENVIRONMENT A -->
+      <div class="topic" id="a-environment">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">🌿</span>
+          <div class="topic-head-text"><h3>Environmental & Planetary Health</h3><p>Climate and health, toxins, urban health, eco-anxiety</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Climate change and health:</strong> Heat waves (India 2024 — 300+ deaths), air quality degradation, water scarcity, vector-borne disease expansion (malaria, dengue moving north). Climate change is a health crisis.</li>
+            <li><strong>Environmental toxins:</strong> Pesticides in food (what washing actually removes and what it doesn't). Heavy metals (lead in paint, arsenic in groundwater). Endocrine disruptors in plastics (BPA, phthalates) — stored in body fat, affect hormones. Practical reduction strategies.</li>
+            <li><strong>Urban health:</strong> Urban heat islands. Light pollution and sleep disruption. Concrete vs green space. The physical and mental health benefit of urban green spaces.</li>
+            <li><strong>Eco-anxiety:</strong> The psychological distress caused by awareness of environmental problems. Increasingly common among aware adolescents. Distinguishing productive concern (motivates action) from paralysing anxiety (needs management). Evidence-based action as an antidote.</li>
+            <li><strong>Sustainable health choices:</strong> Plant-forward diet (lower carbon footprint + better health), sustainable menstrual products (menstrual cup vs 12,000 disposable pads per woman per lifetime), public transport, minimalism.</li>
+            <li><strong>One Health framework:</strong> Human health, animal health, and environmental health are inseparable. Zoonotic disease (COVID, H5N1) as an example. Antimicrobial resistance as an environmental + medical crisis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MORAL A -->
+      <div class="topic" id="a-moral">
+        <div class="topic-head" onclick="this.parentElement.classList.toggle('open')">
+          <span class="topic-icon">⭐</span>
+          <div class="topic-head-text"><h3>Moral Leadership & Community Health</h3><p>Ethics, leadership, giving back, health equity</p></div>
+          <span class="expand">tap to expand</span>
+        </div>
+        <div class="topic-body">
+          <div class="section-label">Content</div>
+          <ul class="content-list">
+            <li><strong>Health equity:</strong> Why some communities in India have worse health outcomes than others — not because of biology but because of access, poverty, and discrimination. Health justice as a moral issue.</li>
+            <li><strong>Moral philosophy basics:</strong> Utilitarianism (greatest good for greatest number), Deontology (rules and duties), Virtue ethics (what a good person would do). How these frameworks apply to real health decisions.</li>
+            <li><strong>Ethical dilemmas in health:</strong> Should vaccines be mandatory? Should tobacco be illegal? Does the government have the right to legislate sugar? Real debates, not pre-determined answers.</li>
+            <li><strong>Leadership as a health practice:</strong> The research on altruism and health — people who help others regularly have lower mortality, less depression, stronger immune function. Giving back is selfish in the best way.</li>
+            <li><strong>PHC Health Leaders programme:</strong> Class 11–12 students who have completed 2 years of PHC become peer health educators — leading sessions for Basic level students, running hygiene drives, organising Activity Day events.</li>
+            <li><strong>Community health outreach:</strong> Students design and execute a small community health awareness project — a hygiene drive for a nearby government school, a dental hygiene awareness activity, or a menstrual health kit distribution in the community.</li>
+            <li><strong>Personal Health Manifesto (Capstone Project):</strong> Students write a 1-page manifesto — their health values, commitments, and vision for their adult health. Shared at the PHC Graduation ceremony.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end content-col -->
+  </div>
+</div><!-- end advanced tab -->
+
+<script>
+function showTab(level) {
+  // Hide all panels and deactivate all buttons
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  // Show selected panel and activate button
+  document.getElementById('tab-' + level).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+}
+</script>
+
+<div style="padding:32px 48px;text-align:center;color:var(--gray);font-size:12px;border-top:1px solid var(--border);margin-top:20px;">
+  <p style="font-weight:700;color:var(--navy);font-size:14px;margin-bottom:4px;">Progressive Health Club by Sakshi Malik — Detailed Syllabi</p>
+  <p>Well Begun. Well Lived. &nbsp;·&nbsp; phcsakshimalik.com &nbsp;·&nbsp; Syllabi v1.0 &nbsp;·&nbsp; July 2026 &nbsp;·&nbsp; Internal — Confidential</p>
+</div>
+
+</body>
+</html>
