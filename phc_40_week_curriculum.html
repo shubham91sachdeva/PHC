@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHC — 40-Week Interactive Curriculum</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root{
+  --navy:#0F2D5E;--teal:#0A7C6E;--gold:#C9951A;--rose:#B03060;
+  --sage:#2E6E45;--purple:#5B2D8E;--orange:#C45A1A;
+  --white:#fff;--light:#F7F9FC;--lgray:#E8EDF5;
+  --gray:#6B7280;--dgray:#374151;--border:#D1D5DB;--ink:#0D1117;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--light);color:var(--ink);}
+
+.hero{background:linear-gradient(135deg,var(--navy),#1a4a8a);padding:40px 48px 0;color:#fff;}
+.hero .vtag{background:rgba(255,255,255,0.15);display:inline-block;padding:3px 12px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:12px;}
+.hero h1{font-size:28px;font-weight:800;margin-bottom:8px;}
+.hero p{color:rgba(255,255,255,.75);font-size:13px;max-width:680px;line-height:1.7;margin-bottom:24px;}
+
+.tab-nav{display:flex;gap:4px;margin-top:4px;}
+.tab-btn{padding:12px 26px;background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.65);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border-radius:10px 10px 0 0;transition:all .2s;}
+.tab-btn:hover{background:rgba(255,255,255,0.18);color:#fff;}
+.tab-btn.active{background:#fff;color:var(--navy);}
+.tab-btn .badge{display:inline-block;background:var(--gold);color:#fff;padding:1px 7px;border-radius:100px;font-size:9px;font-weight:700;margin-left:7px;}
+.tab-btn.active .badge{background:var(--navy);}
+
+.tab-panel{display:none;padding:32px 48px 56px;max-width:1300px;}
+.tab-panel.active{display:block;}
+
+.legend{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.legend .ll{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-right:6px;}
+.fmt{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+.fmt.experiment{background:#FEF3C7;color:#92400E;}
+.fmt.game{background:#D1FAE5;color:#065F46;}
+.fmt.roleplay{background:#FCE7F3;color:#9D174D;}
+.fmt.debate{background:#FEE2E2;color:#991B1B;}
+.fmt.workshop{background:#DBEAFE;color:#1E40AF;}
+.fmt.simulation{background:#EDE9FE;color:#5B21B6;}
+.fmt.outdoor{background:#DCFCE7;color:#166534;}
+.fmt.project{background:#FFEDD5;color:#9A3412;}
+.fmt.circle{background:#E0F2FE;color:#0369A1;}
+.fmt.expert{background:#F3E8FF;color:#6B21A8;}
+.fmt.creative{background:#FFE4E6;color:#9F1239;}
+.fmt.journal{background:#ECFDF5;color:#047857;}
+
+.flagship{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:1.5px solid var(--gold);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+.flagship .fs-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:#92400E;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.flagship p{font-size:12.5px;color:#4B3A0F;line-height:1.7;}
+.flagship .fs-weeks{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.flagship .fs-w{background:#fff;border:1px solid var(--gold);color:#92400E;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:100px;}
+
+.term-block{margin-bottom:30px;}
+.term-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--navy);}
+.term-head h2{font-size:15px;font-weight:800;color:var(--navy);letter-spacing:.3px;}
+.term-head span{font-size:11px;color:var(--gray);font-weight:600;}
+
+.week-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.wk-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.wk-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.wk-num{width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0;}
+.wk-title{flex:1;}
+.wk-title h4{font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.3;}
+.wk-obj{font-size:11.5px;color:var(--gray);margin-top:8px;line-height:1.55;}
+.wk-flow{margin-top:10px;background:var(--light);border-radius:8px;padding:9px 11px;}
+.flow-row{display:flex;gap:7px;font-size:11px;color:var(--dgray);line-height:1.6;margin-bottom:3px;}
+.flow-row:last-child{margin-bottom:0;}
+.flow-row .fmin{flex-shrink:0;font-weight:700;color:var(--teal);width:46px;}
+.wk-mat{margin-top:8px;font-size:10.5px;color:var(--gray);}
+.wk-mat strong{color:var(--dgray);}
+
+@media(max-width:900px){
+  .hero{padding:24px 18px 0;}
+  .tab-panel{padding:20px 16px 40px;}
+  .week-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="vtag">PROGRESSIVE HEALTH CLUB · 40-WEEK SESSION PLAN · v1.0</span>
+  <h1>40-Week Interactive Curriculum</h1>
+  <p>One session, one week, 40 weeks per academic year — mapped for two categories. Every single session is built around an activity, not a lecture: experiments, games, role-play, debate, simulation, and workshops. Students do something in every session; they are never just told something.</p>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('cat1')">📗 Category 1 <span class="badge">Class 4–8</span></button>
+    <button class="tab-btn" onclick="showTab('cat2')">📘 Category 2 <span class="badge">Class 9–12</span></button>
+  </div>
+</div>
+
+<!-- ============ CATEGORY 1 : CLASS 4-8 ============ -->
+<div id="tab-cat1" class="tab-panel active">
+  <div class="legend">
+    <span class="ll">Format Legend</span>
+    <span class="fmt experiment">🧪 Experiment</span>
+    <span class="fmt game">🎲 Game</span>
+    <span class="fmt roleplay">🎭 Role-Play</span>
+    <span class="fmt debate">🗣️ Debate</span>
+    <span class="fmt workshop">🛠️ Workshop</span>
+    <span class="fmt simulation">🎯 Simulation</span>
+    <span class="fmt outdoor">🌳 Outdoor</span>
+    <span class="fmt project">📋 Project</span>
+    <span class="fmt circle">⭕ Circle Discussion</span>
+    <span class="fmt expert">👩‍⚕️ Expert Session</span>
+    <span class="fmt creative">🎨 Creative/Art</span>
+    <span class="fmt journal">✍️ Journaling</span>
+  </div>
+
+  <div class="flagship">
+    <div class="fs-head">🍬 Flagship Recurring Project — The Class Sugar Board</div>
+    <p>A growing wall display students build themselves: real food packets pinned up with their sugar, carb, fat and protein content laid bare — chocolates, chips, drinks, biscuits. It launches in the nutrition term and keeps growing all year, so "reading a label" becomes a habit, not a one-off lesson.</p>
+    <div class="fs-weeks">
+      <span class="fs-w">Week 6 — Board Launch</span>
+      <span class="fs-w">Week 8 — Label Detective Update</span>
+      <span class="fs-w">Week 39–40 — Board Showcase at Activity Day</span>
+    </div>
+  </div>
+
+  <!-- TERM 1 -->
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 1–10 · Hygiene, Dental, Nutrition & Movement</h2><span>July – September</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">1</div><div class="wk-title"><h4>Welcome to PHC — Health Bingo</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Break the ice, introduce the 6 health dimensions, and set a personal health baseline — without a single lecture slide.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "Find someone who…" mixer (has 8 hrs sleep, eats breakfast daily, etc.)</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Health Bingo card — students move around ticking boxes matching classmates to habits</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Each student writes 1 personal health goal for the year on an index card</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Bingo cards, pens, goal cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">2</div><div class="wk-title"><h4>Germ Glitter — Handwashing Science</h4></div></div>
+        <span class="fmt experiment">🧪 Experiment</span>
+        <div class="wk-obj">Make the invisible visible — see exactly why soap beats water alone.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Guess how many germs are on your hands right now (write guesses)</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Glitter = germs. Try removing with water only, then soap + 6-step technique. Compare.</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Class creates a "6-Step Handwash Song" together</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Glitter, soap, water stations, towels</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">3</div><div class="wk-title"><h4>Head-to-Toe Hygiene Relay</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Cover bathing, hair, nails, feet, and clothes hygiene through team competition, not a checklist.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "Hygiene or Myth?" rapid-fire true/false round</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Relay race — teams run to stations (hair/nails/feet/skin) and correctly demo or answer to score</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Fastest-improving team explains their winning habit to class</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Station cards, props (comb, nail clipper, socks)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">4</div><div class="wk-title"><h4>Plaque Attack — Dental Disclosure Lab</h4></div></div>
+        <span class="fmt experiment">🧪 Experiment</span>
+        <div class="wk-obj">See your own brushing gaps with a disclosing tablet and fix technique on the spot.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Brush normally as you always do (timed, no coaching)</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Chew disclosing tablet, see pink missed-plaque zones in mirror, re-brush correctly, re-check</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Students mark their own "smile map" showing weak zones to focus on</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Disclosing tablets, mirrors, toothbrushes, smile-map worksheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">5</div><div class="wk-title"><h4>Egg in Vinegar — Sugar & Cavities</h4></div></div>
+        <span class="fmt experiment">🧪 Experiment</span>
+        <div class="wk-obj">Watch acid dissolve enamel in real time and connect it directly to sugary food and drink choices.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Set up egg-in-vinegar jars (started previous week, revealed today)</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Observe dissolved shell, discuss what this means for teeth exposed to sugar/acid daily</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main 2: Sort snack picture-cards into "teeth friend" / "teeth enemy" piles as teams</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Eggs, vinegar jars (prepped in advance), snack picture cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">6</div><div class="wk-title"><h4>🍬 Sugar Board Launch + Build-Your-Thali Challenge</h4></div></div>
+        <span class="fmt project">📋 Project</span><span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Apply Rainbow Plate concepts through the thali game, then launch the year-long Class Sugar Board.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Rainbow Plate quick-recap quiz (buzzer style)</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Teams get food picture-cards and 90 seconds to build the most balanced thali; judged and scored</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Launch: Empty wall board unveiled — each student brings one empty food packet from home next week to pin up; board sectioned into "Sugar", "Fat", "Protein", "Hidden Surprises"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Food picture cards, plate templates, blank classroom board, coloured section headers</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">7</div><div class="wk-title"><h4>Protein Power Sorting Relay</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Identify high-protein Indian foods and understand daily protein needs through movement, not memorisation.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "How much protein is in this?" guessing game with real packaging</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Relay — run, grab a food card, sort into "protein hero" or "not really" bin, tag team</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Start the Protein Meter tracker — first entry in class together</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Food cards, sorting bins, PHC Protein Meter worksheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">8</div><div class="wk-title"><h4>🍬 Sugar Board Update — Label Detective Scavenger Hunt</h4></div></div>
+        <span class="fmt project">📋 Project</span><span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Pin every student's brought-in food packet to the Sugar Board with its real sugar/fat/carb count worked out live.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "This or that" — hold up two snacks, guess which has more sugar</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: In teams, examine each student's brought packet, calculate sugar/fat-per-serving, write it on a card and pin the packet + card onto the correct Sugar Board section</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Board reveal walk-through — "which 3 pins shocked you most?" — plus each student picks one swap for a healthier snack</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Real snack packets/wrappers (student-sourced), Sugar Board, index cards, pins</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">9</div><div class="wk-title"><h4>Traditional Games Day</h4></div></div>
+        <span class="fmt outdoor">🌳 Outdoor</span>
+        <div class="wk-obj">Experience movement as joy — kabaddi, kho-kho, lagori — while connecting fun to fitness science.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Quick warm-up + dynamic stretch circle led by a student</div>
+          <div class="flow-row"><span class="fmin">30 min</span>Main: Rotate through 2–3 traditional games in small groups</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: Cool-down stretch + "how did your body feel?" quick share</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Playground/field, game markers</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">10</div><div class="wk-title"><h4>Fitness Circuit Stations</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Learn the 5 components of fitness by physically rotating through stations that test each one.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Fitness trainer demos each of 5 stations (30 sec each)</div>
+          <div class="flow-row"><span class="fmin">28 min</span>Main: 5 stations × 5 min each — cardio, strength, endurance, flexibility, balance</div>
+          <div class="flow-row"><span class="fmin">7 min</span>Reflect: Students record their favourite + hardest station on their fitness card</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Cones, mats, timer, fitness trainer</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Fitness Trainer</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERM 2 -->
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 11–20 · My Body, Growing Up & Safety</h2><span>October – November</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">11</div><div class="wk-title"><h4>Body Systems Quiz Relay</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Learn organs and their jobs through a competitive relay, not a diagram to copy.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Silhouette poster — students stick organ cut-outs where they think organs go</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Relay quiz — run, answer an organ-function question, tag next teammate</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Correct the silhouette poster together as a class</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Body silhouette poster, organ cut-outs, quiz cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">12</div><div class="wk-title"><h4>My Body, My Rules — Boundaries Workshop</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Introduce body autonomy and private-parts language before the deeper safety session next week.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "My body belongs to me" call-and-response chant</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Small-group role-play — practising saying "no" confidently to uncomfortable requests (non-touch scenarios)</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: Each student names their 3 trusted adults on a card to keep</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario cards, trusted-adult cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">13</div><div class="wk-title"><h4>Good Touch Bad Touch — Puppet Theatre</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Deliver the most sensitive topic of the year through puppets so it's approachable, not frightening.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Puppet show sets up 3 everyday scenarios</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Class calls out "Good Touch!" / "Bad Touch!" / "Confusing — still tell!" as puppets act; discuss each</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Practice the "Say No, Go, Tell" rule out loud together 3 times</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Puppets, scenario script</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Child Psychologist (co-facilitates)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">14</div><div class="wk-title"><h4>Growing Up — What's Happening to My Body</h4></div></div>
+        <span class="fmt circle">⭕ Circle Discussion</span>
+        <div class="wk-obj">Normalise puberty changes through an anonymous question box format — separate groups by gender.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Hook: Anonymous question box — students write any question, no names, drop in box</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Facilitator answers questions live in circle — timeline of changes, "all bodies are different timelines"</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: "One thing I learned today" — quick popcorn share</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Question box, slips of paper</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Paediatrician (gender-separated groups)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">15</div><div class="wk-title"><h4>Menstrual Health & Pee Safe Kit Day</h4></div></div>
+        <span class="fmt expert">👩‍⚕️ Expert Session</span>
+        <div class="wk-obj">Girls get full menstrual hygiene education and their Pee Safe kit; boys get a parallel allyship session.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Girls: Product demo — pad/cup basics, hands-on with samples</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Girls: Kit distribution + "ask anything" open floor</div>
+          <div class="flow-row"><span class="fmin">30 min</span>Boys (parallel): "Being a good friend" discussion + myth-busting quiz</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Pee Safe sanitary kits, product samples</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Gynaecologist + Pee Safe representative</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">16</div><div class="wk-title"><h4>Stranger Danger 2.0 — Online Safety Sim</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Apply safety rules to online scenarios through realistic simulated chat exchanges.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "Would you tell a stranger this in real life?" rapid quiz</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Mock chat scripts projected — class votes "safe reply" vs "red flag" at each turn</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Build a class list of "never share online" items together</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Printed/projected mock-chat scripts</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">17</div><div class="wk-title"><h4>Feelings Charades</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Build emotional vocabulary through acting and guessing, not a worksheet of feeling words.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Feelings Wheel intro — 8 core emotions</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Charades — act out an emotion + a body sensation, class guesses both</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "A time I felt this way" — pair-share with a partner</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Feelings Wheel poster, emotion cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">18</div><div class="wk-title"><h4>Calm-Down Toolkit Workshop</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Build and practise 4 physical stress-relief tools students can use independently.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "What does stress feel like in YOUR body?" quick body-map drawing</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: 4 stations — balloon breathing, counting-to-10, squeeze-ball, draw-it-out — rotate through all</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Students pick their favourite tool and write it on a bracelet/wristband card to keep</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Stress balls, paper, colours, station cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">19</div><div class="wk-title"><h4>Walk in My Shoes — Empathy Lab</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Build empathy by physically swapping perspectives in guided scenarios.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Pass-the-shoe game — literally swap a shoe and share a "hard day" story</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Scenario cards — pairs act out a conflict from both perspectives, swapping roles halfway</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "What surprised you about the other side?" circle share</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">20</div><div class="wk-title"><h4>Trust Fall Friendship Challenge</h4></div></div>
+        <span class="fmt outdoor">🌳 Outdoor</span>
+        <div class="wk-obj">Build team trust and identify qualities of a healthy friendship through cooperative physical games.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Human knot game — untangle as a team</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Trust-walk (blindfolded, partner-guided obstacle course)</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "3 qualities of a friend I trust" — sticky notes on a class board</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Blindfolds, cones, sticky notes</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERM 3 -->
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 21–30 · Social Health, Digital Wellness & Yoga</h2><span>December – January</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">21</div><div class="wk-title"><h4>Peer Pressure — Choose Your Ending</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Practise saying no to peer pressure through branching-choice skits.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "Would you?" rapid scenarios, quick hands-up votes</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Small groups act out a peer-pressure scene, freeze at the decision point, audience shouts alternate endings to try</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Build a class list of "exit lines" to use under pressure</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">22</div><div class="wk-title"><h4>Bystander Power — Forum Theatre</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Turn passive bystanders into active upstanders against bullying through interactive theatre.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Short bullying scene performed by trained student actors — ends unresolved</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Audience members can shout "Stop!", step in, and replay the scene differently</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: List concrete upstander actions on the board</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scripted scenario, no props needed</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">23</div><div class="wk-title"><h4>Kindness Chain Project — Launch</h4></div></div>
+        <span class="fmt project">📋 Project</span>
+        <div class="wk-obj">Turn kindness into an observable, trackable class-wide challenge.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Brainstorm 20 small acts of kindness as a class</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Each student picks one to commit to this week; writes it on a paper chain link</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Chain goes up on the wall — grows each week as acts are completed</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Coloured paper strips, stapler, wall space</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">24</div><div class="wk-title"><h4>Kindness Chain — Share Circle</h4></div></div>
+        <span class="fmt circle">⭕ Circle Discussion</span>
+        <div class="wk-obj">Close the loop on the kindness project with reflection and celebration.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Circle share — each student tells the class the kind act they did and how it felt</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Vote on the "Kindness Story of the Week"</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Wrap: Class photo with the completed kindness chain</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Completed kindness chain</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">25</div><div class="wk-title"><h4>Screens: Friend or Foe? — Class Debate</h4></div></div>
+        <span class="fmt debate">🗣️ Debate</span>
+        <div class="wk-obj">Explore screen time trade-offs through structured argument instead of a one-sided lecture.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Split class into "For" and "Against" teams — screens are good for kids</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: 2-minute opening arguments each side, rebuttals, audience questions</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Class co-creates a "balanced screen use" agreement</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Debate prep cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">26</div><div class="wk-title"><h4>Spot the Scam — Online Safety Game</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Recognise online scams, fake profiles, and phishing attempts through realistic examples.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Show a real (anonymised) scam message — "who would fall for this?"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Teams sort a stack of message printouts into "Safe" / "Scam" / "Tell an Adult" piles, explain reasoning</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Build a class "red flag checklist" for online messages</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Printed sample messages</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">27</div><div class="wk-title"><h4>My Digital Footprint — Paper Profile</h4></div></div>
+        <span class="fmt creative">🎨 Creative/Art</span>
+        <div class="wk-obj">Visualise what a digital footprint looks like before ever posting for real.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "Everything you post is like writing in permanent marker" — quick demo with a marker on paper vs pencil</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students design a mock "profile page" on paper, then swap with a partner who circles anything unsafe to share</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: Class list of "think before you post" rules</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Profile template printouts, markers</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">28</div><div class="wk-title"><h4>Sun Salutation Practice</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Learn the simplified 5-step Sun Salutation through guided practice, not theory.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Animal pose warm-up (Cat-Cow, Downward Dog stories)</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Guided 5-step Sun Salutation practice, 3 rounds, breath-aligned</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: 3-minute guided relaxation (mini Yoga Nidra) to close</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Yoga mats/floor space</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Yoga Instructor</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">29</div><div class="wk-title"><h4>Balloon Breath & Bumble Bee Breath</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Practise two pranayama techniques for calming and energising, hands-on.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: "How does your breath change when you're scared vs calm?" quick discussion</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Guided practice — Balloon Breath (belly), then Bhramari/Bumble Bee (humming exhale), 5 rounds each</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Journal — "which breath will I use when I feel anxious before a test?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Journals</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Yoga Instructor</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">30</div><div class="wk-title"><h4>Stress Relief Station Rotation</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Consolidate a full toolkit — breathing, movement, journaling, and yoga — into one practised routine.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Recap — name every stress tool learned this term</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: 4 stations (breathing corner, stretch corner, journal corner, quiet art corner) — rotate 6 min each</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Students build a personal "my calm-down plan" card to keep in their bag</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Station props, personal cards</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERM 4 -->
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 31–40 · Values, Money, Environment & Celebration</h2><span>February – April</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">31</div><div class="wk-title"><h4>The Honesty Dilemma — Story Circle</h4></div></div>
+        <span class="fmt circle">⭕ Circle Discussion</span>
+        <div class="wk-obj">Explore integrity through relatable moral dilemmas, not preaching.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Short story stops at a decision point — "What should she do?"</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Small groups debate and vote on the ending, then compare with the real story's outcome</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "A time I chose honesty even when it was hard" — voluntary share</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Story cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">32</div><div class="wk-title"><h4>Fairness Court — Mini Mock Trial</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Practise ethical reasoning and accountability through a playful class "courtroom."</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Set the scene — a fictional classroom "unfairness" case</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students play judge, jury, witnesses; argue both sides of a fairness dilemma</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Class verdict + discussion on what fairness actually means</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Role cards, gavel prop (fun)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">33</div><div class="wk-title"><h4>Class Economy — Money Simulation Launch</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Learn needs vs wants and saving by running a mini classroom economy over 2 weeks.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Introduce PHC-dollars — students "earn" them for tasks this week</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Set up a mini "shop" of needs (pencils, stickers) vs wants (extra recess, prizes); students plan spend/save</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Predict — "will you save or spend this week?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Play currency, shop items</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">34</div><div class="wk-title"><h4>Class Economy — Shop Day</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Experience the real consequence of saving vs impulsive spending.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Shop is open — students spend or save their earned PHC-dollars; savers get a small bonus</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "Who saved? Who spent it all? What would you do differently?" open discussion</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Wrap: Introduce Save-Spend-Give jar concept for real pocket money</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Play currency, shop items</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">35</div><div class="wk-title"><h4>Nature Walk & Pollution Scavenger Hunt</h4></div></div>
+        <span class="fmt outdoor">🌳 Outdoor</span>
+        <div class="wk-obj">Connect environmental health to daily observation, not an abstract topic.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "What do healthy vs unhealthy environments look like?" quick brainstorm</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Guided school-ground walk — spot and log signs of pollution, green spaces, water sources</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Map findings on a class chart; pick one issue to act on</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Clipboards, observation sheets</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">36</div><div class="wk-title"><h4>Dirty Water Filter — Build Challenge</h4></div></div>
+        <span class="fmt experiment">🧪 Experiment</span>
+        <div class="wk-obj">Understand water quality and filtration by building a working filter.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Show a jar of visibly dirty water — "how would you clean this?"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Teams build a layered filter (sand, gravel, cloth, charcoal) in a bottle and test it</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Compare team results; discuss why we still boil/treat water even after filtering</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Bottles, sand, gravel, charcoal, cloth, dirty water sample</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">37</div><div class="wk-title"><h4>Community Health Project — Planning</h4></div></div>
+        <span class="fmt project">📋 Project</span>
+        <div class="wk-obj">Design a small, real health-awareness action for the school or neighbourhood.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Brainstorm — "one health problem we could actually help fix nearby"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Teams pick a project (hygiene posters for younger classes, canteen suggestion drive, cleanup) and plan it</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Each team presents their one-sentence project pitch</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Planning worksheets, chart paper</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">38</div><div class="wk-title"><h4>Health Report Card — Self-Assessment Workshop</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Reflect on the year's growth using data students collected themselves, not a test.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Pull out July's "Health Baseline" card from Week 1 — compare to today</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students fill in their final Health Report Card — fitness, nutrition habits, sleep, stress tools learned</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Pair-share one thing that genuinely changed this year</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Health Report Card forms</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">39</div><div class="wk-title"><h4>🍬 Sugar Board Finale + Activity Day Rehearsal</h4></div></div>
+        <span class="fmt project">📋 Project</span><span class="fmt outdoor">🌳 Outdoor</span>
+        <div class="wk-obj">Turn the year-long Sugar Board into a school-wide exhibit booth and rehearse all Activity Day stations.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Sugar Board team sorts the year's pinned packets into a "Top 10 Shockers" mini-exhibit for the booth</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Remaining teams rehearse their assigned booth/demo (yoga showcase, fitness challenge corner)</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Full run-through with peer feedback</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Sugar Board archive, booth props per team</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">40</div><div class="wk-title"><h4>Certification Day & Health Pledge</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Close the year with a celebration, not a farewell lecture.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Whole-school Activity & Health Day showcase — Sugar Board "Top 10 Shockers" exhibit + other booths run live for younger classes and parents</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: PHC Certificates awarded (signed by Sakshi Malik)</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Wrap: Class recites the PHC Health Pledge together, hands on hearts</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Certificates, pledge card, Sugar Board exhibit</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ CATEGORY 2 : CLASS 9-12 ============ -->
+<div id="tab-cat2" class="tab-panel">
+  <div class="legend">
+    <span class="ll">Format Legend</span>
+    <span class="fmt experiment">🧪 Lab</span>
+    <span class="fmt game">🎲 Game</span>
+    <span class="fmt roleplay">🎭 Role-Play</span>
+    <span class="fmt debate">🗣️ Debate</span>
+    <span class="fmt workshop">🛠️ Workshop</span>
+    <span class="fmt simulation">🎯 Simulation</span>
+    <span class="fmt outdoor">🌳 Outdoor</span>
+    <span class="fmt project">📋 Project</span>
+    <span class="fmt circle">⭕ Circle Discussion</span>
+    <span class="fmt expert">👩‍⚕️ Expert Session</span>
+    <span class="fmt creative">🎨 Creative/Art</span>
+    <span class="fmt journal">✍️ Journaling</span>
+  </div>
+
+  <div class="flagship">
+    <div class="fs-head">🍬 Flagship Recurring Project — The Advanced Sugar & Ingredient Board</div>
+    <p>The senior version of the Class Sugar Board: real packaging pinned up with full macro breakdown, hidden-sugar audits, and myth-vs-evidence verdicts researched by students themselves. It grows across the year and is formally handed down to junior classes at year-end.</p>
+    <div class="fs-weeks">
+      <span class="fs-w">Week 3 — Board Launch: Ingredient Audit</span>
+      <span class="fs-w">Week 33 — Myth-Busting Update</span>
+      <span class="fs-w">Week 37 — Board Legacy Handover Project</span>
+    </div>
+  </div>
+
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 1–10 · Body Science, Nutrition & Sports Performance</h2><span>July – September</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">1</div><div class="wk-title"><h4>My Health Contract — Goal Lab</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Set the tone for a peer-led, ownership-driven year instead of a passive one.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Speed-share — "one health habit I want to build this year"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students write a personal "Health Contract" — 3 SMART goals across physical/mental/social health</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Contracts sealed in envelopes, opened again in Week 40</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Contract templates, envelopes</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">2</div><div class="wk-title"><h4>Calculate Your Metabolism — Data Lab</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">Make BMR/TDEE tangible by having students calculate their own using real formulas.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "How many calories do you burn just lying in bed all day?" guesses</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students calculate their own BMR (Harris-Benedict) and TDEE with activity multiplier, in pairs</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Discuss why crash diets backfire metabolically</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Calculators, formula worksheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">3</div><div class="wk-title"><h4>🍬 Sugar Board Launch — Ingredient Audit & Food Log</h4></div></div>
+        <span class="fmt project">📋 Project</span>
+        <div class="wk-obj">Apply macro/micronutrient concepts to real personal data, then launch the Advanced Sugar & Ingredient Board.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Guess-the-macros on 3 common meals (competition style)</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Students log everything eaten yesterday, tag each item's dominant macro, spot gaps</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Launch: Board unveiled — each student brings one packaged product next week and audits its full ingredient list (not just sugar — additives, preservatives, "hidden names for sugar")</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Food log worksheet, macro reference card, blank display board, ingredient-name decoder sheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">4</div><div class="wk-title"><h4>Eating Disorders — Anonymous Case Study Circle</h4></div></div>
+        <span class="fmt circle">⭕ Circle Discussion</span>
+        <div class="wk-obj">Build awareness and reduce stigma without singling anyone out.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Anonymous case (fictionalised composite) read aloud</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Small groups identify warning signs, discuss what a supportive friend would do</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Share helpline info, normalise seeking help</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Case study handout</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Psychologist / Nutritionist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">5</div><div class="wk-title"><h4>Strength Training Circuit + Form Clinic</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Learn safe, correct strength-training form through hands-on coaching.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Trainer demos correct vs incorrect squat/push-up form — spot the difference</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Circuit — bodyweight strength stations with trainer correcting form in real time</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Students design next week's personal strength routine</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Mats, cones</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Fitness Trainer</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">6</div><div class="wk-title"><h4>RICE Protocol — First Aid Simulation</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Practise real injury response with hands-on simulated scenarios.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "You just twisted your ankle in a match — what now?" open floor guesses</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Stations simulate sprain, strain, and minor cuts; students practise Rest-Ice-Compression-Elevation and basic bandaging</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Quiz — "play through it or stop?" scenario cards</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Bandages, ice packs, first-aid kit</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Sports Physiotherapist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">7</div><div class="wk-title"><h4>Should Doping Be Allowed? — Structured Debate</h4></div></div>
+        <span class="fmt debate">🗣️ Debate</span>
+        <div class="wk-obj">Explore PED science and ethics through structured argument.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Show (anonymised) real athlete ban case — quick reactions</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Formal debate — For/Against teams argue with prepared evidence, judged panel</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Reveal the real health consequences of steroid use</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Debate briefs, evidence cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">8</div><div class="wk-title"><h4>Reproductive Anatomy Lab</h4></div></div>
+        <span class="fmt expert">👩‍⚕️ Expert Session</span>
+        <div class="wk-obj">Deliver accurate anatomy through diagram-labelling activity, gender-separated.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Hook: Anonymous question box opens</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Diagram-labelling activity in small groups, expert circulates and corrects</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Expert answers box questions live</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Diagram worksheets</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Gynaecologist / General Physician (gender-separated)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">9</div><div class="wk-title"><h4>Consent Scenarios Workshop</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Build a practical, felt understanding of consent through scenario practice.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "Cup of tea" consent analogy video/skit</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Small groups work through consent scenario cards (non-romantic and romantic), decide consent given/not/unclear</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Class builds a "what consent sounds like" phrase list</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario cards</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Psychologist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">10</div><div class="wk-title"><h4>Myth vs Fact — STI Awareness Game Show</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Correct misinformation through a fast, low-pressure quiz-show format.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Team formation + buzzer setup</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Myth-vs-fact buzzer round on transmission, prevention, testing — expert corrects and explains after each</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Recap the one method that protects against both pregnancy and STIs</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Buzzers, question set</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Gynaecologist / General Physician</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 11–20 · Relationships, Menstrual Health & Mental Health</h2><span>October – November</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">11</div><div class="wk-title"><h4>Red Flag / Green Flag Sorting Game</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Identify healthy vs unhealthy relationship behaviours quickly and confidently.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: Quick personal reflection — "what does a healthy friendship feel like?"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Teams sort 30 behaviour cards (checking phone, celebrating your wins, isolating you) into red/green flag piles</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Discuss the trickiest cards as a class</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Behaviour cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">12</div><div class="wk-title"><h4>Menstrual Health Advanced — Case Studies</h4></div></div>
+        <span class="fmt expert">👩‍⚕️ Expert Session</span>
+        <div class="wk-obj">Recognise PCOS/endometriosis symptoms and receive advanced Pee Safe product education.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Girls: Case studies — "is this pain normal?" — small group diagnosis discussion</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Girls: Pee Safe advanced product demo — cup, period underwear</div>
+          <div class="flow-row"><span class="fmin">30 min</span>Boys (parallel): Allyship + advanced myth-busting discussion</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Case cards, Pee Safe product samples</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Gynaecologist + Pee Safe representative</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">13</div><div class="wk-title"><h4>Perspectives Panel — Inclusion Circle</h4></div></div>
+        <span class="fmt circle">⭕ Circle Discussion</span>
+        <div class="wk-obj">Build empathy and awareness around identity and inclusion through open, respectful dialogue.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Ground rules for respectful dialogue set together</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Facilitated circle discussion — identity, belonging, allyship, guided by trained counsellor</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: One-word check-out round</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> None — discussion-based</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Psychologist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">14</div><div class="wk-title"><h4>Walk in Their Shoes — Depression & Anxiety Sim</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Build genuine empathy for mental illness through an experiential simulation, not a lecture on symptoms.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Simple task made artificially harder (weighted backpack, noise distraction) to simulate "everything feels heavier"</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Debrief — connect the exercise to how depression/anxiety affects daily function</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "How would I want a friend to treat me if I felt like this?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Backpack/weights, noise-maker</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Clinical Psychologist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">15</div><div class="wk-title"><h4>Asking for Help — Role-Play Practice</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Rehearse the actual words needed to ask a parent or friend for mental health support.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "Why is asking for help so hard?" quick pair discussion</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Pairs role-play asking a parent/friend for help using scripted starters, then swap roles</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Share helplines (iCall, Vandrevala) — write on personal card</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Script starter cards, helpline cards</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Clinical Psychologist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">16</div><div class="wk-title"><h4>Cortisol Lab — Exam Stress Science</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">Understand the biology of stress through a physical demonstration and station-based coping practice.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Heart-rate check before and after a 60-second timed "pressure task"</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Stations — breathing, movement, cognitive reframe cards — each shown to lower measured heart rate</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Build a personal "exam week toolkit" card</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Stopwatch/heart-rate app, station props</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">17</div><div class="wk-title"><h4>Attachment Style Quiz + Discussion</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Introduce attachment theory through a self-assessment students can relate to immediately.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Hook: Short self-assessment quiz (secure/anxious/avoidant tendencies)</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Small groups discuss how attachment style shows up in friendships/relationships (no personal disclosure required)</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "One thing I want to work on in how I relate to others"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Quiz handout</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">18</div><div class="wk-title"><h4>Heartbreak Journaling Circle</h4></div></div>
+        <span class="fmt journal">✍️ Journaling</span>
+        <div class="wk-obj">Normalise emotional pain from relationship loss and build healthy processing habits.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Share the neuroscience fact — heartbreak activates the same brain regions as physical pain</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Guided journaling prompts on loss/disappointment (any kind, not just romantic)</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Optional voluntary share circle</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Journals</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">19</div><div class="wk-title"><h4>Toxic Pattern Spotting — Scenario Lab</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Apply relationship red-flag knowledge to realistic, layered scenarios.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Recap red/green flags from Week 11</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Groups analyse longer scripted relationship scenarios (text exchanges), identify gaslighting/control/isolation patterns</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "Who could you tell if something felt wrong?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario scripts</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Psychologist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">20</div><div class="wk-title"><h4>Family Conflict — Perspective Swap Role-Play</h4></div></div>
+        <span class="fmt roleplay">🎭 Role-Play</span>
+        <div class="wk-obj">Build communication skills for common parent-teen conflicts.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Common conflict topics named by class (curfew, phone, grades)</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Pairs role-play conflict scenario, then swap to play the parent's side</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Build a class list of "I statements" that de-escalate conflict</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Scenario cards</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 21–30 · Digital Wellness, Financial Health & Yoga</h2><span>December – January</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">21</div><div class="wk-title"><h4>Design Your Own Algorithm</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Understand engagement-driven design by having students build a mini "algorithm" themselves.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: "What made you keep scrolling last night?" honest share</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: In teams, students design rules for a fictional app's feed to maximise time-spent — then discuss the ethics of what they just built</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: List 3 personal counter-strategies</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Worksheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">22</div><div class="wk-title"><h4>Deconstruct the Ad — Media Literacy Lab</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">See through edited/curated media by taking it apart, not being told it's fake.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Show a heavily filtered photo/ad — guess what's edited</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Teams analyse real (anonymised) social posts/ads, list every persuasion technique used</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "What would the unedited version look like?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Printed sample posts/ads</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">23</div><div class="wk-title"><h4>Mock Cyberbullying Tribunal</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Explore consequences and responses to cyberbullying through a structured mock case.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Fictional case scenario read out</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Groups play different roles (target, bystander, school, platform) and propose what should happen</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Compare with actual legal/school consequences under IT Act</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Case scenario, role cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">24</div><div class="wk-title"><h4>Compound Interest Challenge</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">Make the power of starting early with investing visceral through real number-crunching.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Guess — ₹5,000/month from age 18 vs age 30 — how different is the payout at 60?</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students calculate both scenarios using a compound interest formula/calculator, compare results</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "What's one thing you'll do differently with money starting this year?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Calculators, formula sheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">25</div><div class="wk-title"><h4>Adulting Budget Simulation</h4></div></div>
+        <span class="fmt simulation">🎯 Simulation</span>
+        <div class="wk-obj">Confront the reality of a real salary against real expenses.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Reveal a realistic entry-level monthly salary figure</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students allocate the salary across rent, food, transport, insurance, savings, discretionary — using real Indian city cost cards</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Share where budgets broke down and why</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Cost-of-living cards, budget sheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">26</div><div class="wk-title"><h4>Bank Rep Workshop — Accounts & Insurance</h4></div></div>
+        <span class="fmt expert">👩‍⚕️ Expert Session</span>
+        <div class="wk-obj">Get hands-on with real banking and insurance concepts from an industry expert.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Hook: "What's the difference between saving and investing?" quick poll</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Bank rep walks through opening a savings account, SIP basics, health insurance — with real sample documents</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Q&A — students ask anything</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Sample account/insurance documents</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Bank Representative / Financial Literacy Specialist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">27</div><div class="wk-title"><h4>Debt Trap — Board Game Simulation</h4></div></div>
+        <span class="fmt game">🎲 Game</span>
+        <div class="wk-obj">Feel the psychological pull of debt through a playable simulation.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Rules explained — credit card "trap" board game</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Play the game — tempting purchases vs interest snowballing</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "How did it feel watching the debt grow?" discussion</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Board game set (custom-built)</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">28</div><div class="wk-title"><h4>Career-Values Matching Exercise</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Connect career choice to sustainable long-term health, not just salary.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Rank personal values (security, creativity, impact, freedom) individually</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Match values against career case studies — which careers align, which create conflict/burnout risk</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: "One career I hadn't considered that might fit my values"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Values cards, career case cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">29</div><div class="wk-title"><h4>Advanced Pranayama Practice + Teach-Back</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Deepen breathwork skill by having students teach a technique to a partner.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Guided practice — Anulom Vilom, Kapalabhati, Bhramari (full rounds)</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Students pair up and teach one technique back to a partner from memory</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Journal — which technique will you use before your next exam?</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Mats, journals</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Senior Yoga Instructor</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">30</div><div class="wk-title"><h4>Try 4 Meditation Styles Lab</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">Let students discover which meditation style actually works for them, experientially.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">28 min</span>Main: 4 × 7-min guided tries — focused attention, open monitoring, loving-kindness, body scan</div>
+          <div class="flow-row"><span class="fmin">12 min</span>Reflect: Journal which style felt most natural + why</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Journals, quiet space</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Yoga Instructor / Psychologist</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="term-block">
+    <div class="term-head"><h2>Weeks 31–40 · Ethics, Environment & Capstone</h2><span>February – April</span></div>
+    <div class="week-grid">
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">31</div><div class="wk-title"><h4>Yoga Nidra — Deep Relaxation Session</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Experience a full guided Yoga Nidra and understand its nervous-system science.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">5 min</span>Hook: HRV/heart rate check before</div>
+          <div class="flow-row"><span class="fmin">30 min</span>Main: Full 25-min guided Yoga Nidra practice, lying down</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Reflect: Heart rate check after — compare and discuss</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Mats, quiet space</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Yoga Instructor</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">32</div><div class="wk-title"><h4>Oral Cancer Awareness — Self-Exam Demo</h4></div></div>
+        <span class="fmt expert">👩‍⚕️ Expert Session</span>
+        <div class="wk-obj">Build tobacco-risk awareness and a practical self-check habit.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Hook: Real (India-specific) oral cancer statistics tied to tobacco/gutka use</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Dentist demonstrates a self-exam technique using mirrors; students practise</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Discuss peer pressure around tobacco and how to decline</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Mirrors</div>
+        <div class="wk-mat" style="margin-top:2px;"><strong>Expert:</strong> Dentist</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">33</div><div class="wk-title"><h4>🍬 Sugar Board Update — Myth-Busting Lab</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span><span class="fmt project">📋 Project</span>
+        <div class="wk-obj">Research real diet-trend claims and pin verified verdicts onto the Sugar & Ingredient Board as a "Myth vs Evidence" wall.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: List popular diet trends students have heard of (keto, GM diet, detox teas)</div>
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Teams research one trend, write a verdict card — evidence-based or not, with the source</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Pin verdict cards onto the Board's new "Myth vs Evidence" section; class votes on the most surprising myth busted</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Reference material, verdict cards, Sugar & Ingredient Board</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">34</div><div class="wk-title"><h4>Carbon Footprint Calculator Activity</h4></div></div>
+        <span class="fmt experiment">🧪 Lab</span>
+        <div class="wk-obj">Connect personal lifestyle to environmental and health impact using real calculations.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Guess your own footprint before calculating</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students calculate personal/family carbon footprint using a simplified worksheet formula</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Identify 2 realistic changes to reduce it</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Calculator worksheet</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">35</div><div class="wk-title"><h4>Eco-Anxiety — Action Planning Workshop</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Turn climate concern into constructive action instead of paralysis.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Honest share — "does climate change worry you? how much?"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Small groups design one realistic, doable school-level environmental action</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Vote on which action to actually pursue as a class</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Planning sheets</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">36</div><div class="wk-title"><h4>Ethics Moot — Health Policy Debate</h4></div></div>
+        <span class="fmt debate">🗣️ Debate</span>
+        <div class="wk-obj">Apply moral philosophy frameworks to real, debatable health policy questions.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Pick a live question — "should sugary drinks be taxed?"</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Formal moot — teams argue using utilitarian vs rights-based frameworks</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Class reflects on which framework felt more convincing and why</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Framework briefing cards</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">37</div><div class="wk-title"><h4>🍬 Sugar Board Legacy Handover + Community Project Pitch</h4></div></div>
+        <span class="fmt project">📋 Project</span>
+        <div class="wk-obj">Package the year's Sugar & Ingredient Board as a teaching resource for junior classes, then pitch a community health project.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Teams condense the Board into a "Junior Starter Kit" — top 15 most useful entries, simplified for Class 4–8</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: Teams design a community health project (hygiene drive, junior-school teaching session, awareness campaign) and build a pitch</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Rapid-fire 1-minute pitches to class, peer feedback</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Sugar Board archive, pitch template, chart paper</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">38</div><div class="wk-title"><h4>Peer Health Leader — Teach-the-Juniors Day</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Cement learning by having senior students actually teach a Basic-level PHC session.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">15 min</span>Prep: Final rehearsal of a hygiene/nutrition mini-session to deliver</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Senior students deliver a 25-min interactive session to a junior class</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Debrief — "what surprised you about teaching this?"</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Session materials from Category 1 curriculum</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">39</div><div class="wk-title"><h4>Personal Health Manifesto — Writing Workshop</h4></div></div>
+        <span class="fmt journal">✍️ Journaling</span>
+        <div class="wk-obj">Consolidate 4 years of PHC learning into a personal, lasting document.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">10 min</span>Hook: Open the sealed Health Contract envelope from Week 1 — how much changed?</div>
+          <div class="flow-row"><span class="fmin">25 min</span>Main: Students draft their 1-page Personal Health Manifesto — values, commitments, vision for adult health</div>
+          <div class="flow-row"><span class="fmin">10 min</span>Reflect: Optional voluntary share</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Manifesto template, Week 1 envelopes</div>
+      </div>
+
+      <div class="wk-card"><div class="wk-top"><div class="wk-num">40</div><div class="wk-title"><h4>PHC Graduation — Capstone Presentation Day</h4></div></div>
+        <span class="fmt workshop">🛠️ Workshop</span>
+        <div class="wk-obj">Celebrate and certify the completion of the full PHC Advanced journey.</div>
+        <div class="wk-flow">
+          <div class="flow-row"><span class="fmin">20 min</span>Main: Selected students present their Health Manifesto / capstone project to the class</div>
+          <div class="flow-row"><span class="fmin">15 min</span>Main: PHC Advanced Certificates awarded (signed by Sakshi Malik)</div>
+          <div class="flow-row"><span class="fmin">5 min</span>Wrap: Class Health Pledge for adult life, recited together</div>
+        </div>
+        <div class="wk-mat"><strong>Materials:</strong> Certificates, pledge card</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(cat) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + cat).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+}
+</script>
+
+<div style="padding:28px 48px;text-align:center;color:var(--gray);font-size:12px;border-top:1px solid var(--border);margin-top:10px;">
+  <p style="font-weight:700;color:var(--navy);font-size:14px;margin-bottom:4px;">Progressive Health Club by Sakshi Malik — 40-Week Interactive Curriculum</p>
+  <p>Well Begun. Well Lived. &nbsp;·&nbsp; phcsakshimalik.com &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; Internal — Confidential</p>
+</div>
+
+</body>
+</html>
